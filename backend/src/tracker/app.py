@@ -1,8 +1,6 @@
 
 from fastapi import FastAPI
-from fastapi.routing import APIRoute
 from pydantic import BaseModel
-
 from tracker.utils.fastapi._make_route import make_route
 
 class Person(BaseModel):
