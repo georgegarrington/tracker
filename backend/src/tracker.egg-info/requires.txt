@@ -1,2 +1,0 @@
-fastapi>=0.123.8
-more-itertools>=10.8.0

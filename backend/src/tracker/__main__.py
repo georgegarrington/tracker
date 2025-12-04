@@ -1,9 +1,15 @@
+from .app import make_service
+import uvicorn
+from .settings import get_settings
 
 def main() -> None:
 
-    x: int = 1
+    settings = get_settings()
 
-    print("hello")
+    uvicorn.run(
+        make_service,
+        port = settings.PORT,
+    )
 
 if __name__ == "__main__":
     main()
