@@ -19,5 +19,6 @@ dev = [
     "ipykernel==7.1.*",
     "mypy==1.*",
     "pydantic-settings==2.*",
+    "requests==2.32.*",
     "ruff==0.*",
 ]
