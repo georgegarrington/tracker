@@ -869,6 +869,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
     { name = "more-itertools" },
+    { name = "pydantic" },
     { name = "sqlalchemy" },
     { name = "uvicorn" },
 ]
@@ -886,6 +887,7 @@ dev = [
 requires-dist = [
     { name = "fastapi", specifier = "==0.123.*" },
     { name = "more-itertools", specifier = "==10.*" },
+    { name = "pydantic", specifier = "==2.12.*" },
     { name = "sqlalchemy", specifier = "==2.0.*" },
     { name = "uvicorn", specifier = "==0.38.*" },
 ]
