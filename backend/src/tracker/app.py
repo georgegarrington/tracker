@@ -1,5 +1,6 @@
 
 from fastapi import FastAPI
+from fastapi.requests import Request
 from pydantic import BaseModel
 from tracker.utils.fastapi._make_route import make_route
 
@@ -8,7 +9,7 @@ class Person(BaseModel):
     age: int
 
 
-async def test_route() -> Person:
+async def test_route(req: Request) -> Person:
     return Person(
         name="George",
         age=28,
