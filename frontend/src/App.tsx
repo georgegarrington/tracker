@@ -26,18 +26,19 @@ export default function App() {
       <CssBaseline />
       <ThemeProvider theme={THEME}>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'grey', width: '100vw' }}>
-        <AppBar position="relative" sx={{backgroundColor: "ggtest.main"}}>
+        <AppBar position="fixed" sx={{backgroundColor: "primary.main", zIndex: theme => theme.zIndex.drawer + 1}}>
           <Toolbar variant='dense'>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="h6" color="text.secondary" noWrap>
+              {/* The quick brown fox jumps over the lazy dog */}
               Tracker
             </Typography>
           </Toolbar>
         </AppBar>
-        {/* <Drawer variant="permanent" anchor="left">
+        <Drawer variant="permanent" anchor="left">
           <Toolbar />
           <Box sx={{ width: 240, bgcolor: 'background.paper', height: '100%' }}>
           </Box>
-        </Drawer> */}
+        </Drawer>
         {/* <Typography>test</Typography> */}
       </Box>
       </ThemeProvider>
