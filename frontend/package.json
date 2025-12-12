@@ -8,11 +8,13 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate": "openapi-ts"
+    "generate": "openapi-ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@fontsource/roboto": "^5.2.9",
     "@mui/material": "^7.3.6",
     "es-toolkit": "^1.42.0",
     "react": "^19.2.0",
@@ -32,6 +34,7 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "prettier": "^3.0.0"
   }
 }
