@@ -1,5 +1,5 @@
 import Link from '@mui/material/Link';
-import { AppBar, Box, Container, CssBaseline, ThemeProvider, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Drawer, ThemeProvider, Toolbar, Typography } from '@mui/material';
 import { THEME } from './theme';
 
 function Copyright() {
@@ -33,6 +33,11 @@ export default function App() {
             </Typography>
           </Toolbar>
         </AppBar>
+        {/* <Drawer variant="permanent" anchor="left">
+          <Toolbar />
+          <Box sx={{ width: 240, bgcolor: 'background.paper', height: '100%' }}>
+          </Box>
+        </Drawer> */}
         {/* <Typography>test</Typography> */}
       </Box>
       </ThemeProvider>
