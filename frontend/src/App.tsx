@@ -25,7 +25,7 @@ export default function App() {
     <>
       <CssBaseline />
       <ThemeProvider theme={THEME}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'grey', width: '100vw' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'background.default', width: '100vw' }}>
         <AppBar position="fixed" sx={{backgroundColor: "primary.main", zIndex: theme => theme.zIndex.drawer + 1}}>
           <Toolbar variant='dense'>
             <Typography variant="h6" color="text.secondary" noWrap>
