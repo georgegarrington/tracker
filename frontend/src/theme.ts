@@ -7,8 +7,8 @@ export const THEME = createTheme({
         secondary: {main: "#E7C8DD"},
         ggtest: {main: "#471f11ff"},
         background: {
-            default: "#f0f0f0",
-            paper: "#f8f8f8ff",
+            paper: "#f0f0f0",
+            default: "#f8f8f8ff",
         },
         text: {
             primary: "#000000ff",
