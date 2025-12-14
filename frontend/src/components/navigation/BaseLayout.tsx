@@ -51,7 +51,7 @@ export function BaseLayout({ pageSpecs }: { pageSpecs: PageSpec[] }) {
       >
         <Toolbar />
         <List>
-          {pageSpecs.map((pageSpec, index) => (
+          {pageSpecs.filter(pageSpec => !pageSpec.noDrawer).map((pageSpec, index) => (
             <ListItem key={index}>
               <ListItemButton component={Link} to={pageSpec.path}>
                 <ListItemText primary={pageSpec.label} />

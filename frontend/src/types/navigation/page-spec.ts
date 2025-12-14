@@ -1,7 +1,9 @@
 import type { JSX } from "react";
 
-export interface PageSpec {
+export type PageSpec = {
   content: JSX.Element;
   path: string;
-  label: string;
-}
+} & (
+  {  
+  label: string;} | {noDrawer: true}
+)

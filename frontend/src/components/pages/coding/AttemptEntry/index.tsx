@@ -19,7 +19,7 @@ export function AttemptEntry(
     direction="column" 
     component="form" 
     gap={1} 
-    sx={{width: "100%"}}
+    sx={{width: "100%", p: 1}}
     >
       <CodingProblemAutocomplete existingProblems={existingProblems}/>
       <Stack direction="row" gap={1}>
@@ -32,6 +32,6 @@ export function AttemptEntry(
       </Stack>
       <TagAutocomplete existingTags={existingTags}/>
       <TextField label="Notes" minRows={16} multiline/>
-      <Button variant="contained" sx={{alignSelf: "center"}}>Record attempt</Button>
+      <Button href = "/coding"variant="contained" sx={{alignSelf: "center"}}>Record attempt</Button>
     </Stack>
 }

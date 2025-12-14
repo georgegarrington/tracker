@@ -1,6 +1,7 @@
 import { DataGrid, type GridCellParams, type GridColDef } from "@mui/x-data-grid";
 import type { Difficulty } from "../../../../types/common";
 import { DifficultyChip } from "../../../common/DifficultyChip";
+import { Box } from "@mui/material";
 
 export function CodingAttemptTable() {
 
@@ -37,6 +38,7 @@ export function CodingAttemptTable() {
     ]
 
     return <DataGrid
+    sx={{width: "100%"}}
     rows={[
         {
             id: 1,
