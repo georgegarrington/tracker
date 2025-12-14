@@ -13,9 +13,18 @@ function getExistingProblems(): string[] {
 
 function getExistingTags(): string[] {
   return [
-    "array",
+    "linked list",
+    "sliding window",
+    "binary search",
+    "tree",
+    "stack",
+    "graph",
+    "dynamic programming",
+    "greedy",
     "hash table",
-    "two pointers",
+    "depth-first search",
+    "breadth-first search",
+    "recursion",
   ]
 }
 
