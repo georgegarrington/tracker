@@ -18,6 +18,8 @@ import { BaseLayout } from "./components/navigation/BaseLayout";
 import Roles from "./components/pages/roles";
 import Coding from "./components/pages/coding";
 import SysDesign from "./components/pages/sysdesign";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const drawerWidth = 240;
 
@@ -26,13 +28,15 @@ export default function App() {
     <>
       <CssBaseline />
       <ThemeProvider theme={THEME}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
         <BaseLayout
           pageSpecs={[
             { path: "/roles", label: "Roles", content: <Roles /> },
             { path: "/coding", label: "Coding", content: <Coding /> },
-            { path: "/test", label: "Test", content: <SysDesign /> },
+            { path: "/test", label: "System Design", content: <SysDesign /> },
           ]}
         />
+        </LocalizationProvider>
       </ThemeProvider>
     </>
   );

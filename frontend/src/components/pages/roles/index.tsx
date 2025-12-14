@@ -4,28 +4,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import { ApplicationStatusChip } from "../../common/ApplicationStatusChip";
 import { ApplicationStatusVariants, type ApplicationStatus } from "../../../types/ApplicationStatus";
 
-export default function Roles() {
-  const cols: GridColDef[] = [
-    // { field: "id", headerName: "ID", width: 70 },
-    { field: "recruiter", headerName: "Recruiter", width: 130 },
-    { field: "firm", headerName: "Firm", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 200,
-      type: "singleSelect",
-      valueOptions:[...ApplicationStatusVariants],
-      renderCell: (params: GridCellParams<any, ApplicationStatus>) =>
-        params.value && (
-          <ApplicationStatusChip applicationStatus={params.value} />
-        ),
-    },
-    { field: "nextEvent", headerName: "Next Event", width: 200 },
-    {field: "notes", headerName: "Notes", width: 400 },
-    // { field: "description", headerName: "Description", width: 200 },
-  ];
+function getRoles() {
 
-  const rows = [
+  const roles = [
     { id: 1, recruiter: "Alex Goodall", firm: "GSA", status: "unstarted",
       nextEvent: "No upcoming events",
 
@@ -122,6 +103,33 @@ export default function Roles() {
       notes: "Ask if he can refer me",
     }
   ];
+
+  return roles;
+
+}
+
+export default function Roles() {
+  const cols: GridColDef[] = [
+    // { field: "id", headerName: "ID", width: 70 },
+    { field: "recruiter", headerName: "Recruiter", width: 130 },
+    { field: "firm", headerName: "Firm", width: 200 },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 200,
+      type: "singleSelect",
+      valueOptions:[...ApplicationStatusVariants],
+      renderCell: (params: GridCellParams<any, ApplicationStatus>) =>
+        params.value && (
+          <ApplicationStatusChip applicationStatus={params.value} />
+        ),
+    },
+    { field: "nextEvent", headerName: "Next Event", width: 200 },
+    {field: "notes", headerName: "Notes", width: 400 },
+    // { field: "description", headerName: "Description", width: 200 },
+  ];
+
+  const rows = getRoles();
 
   return (
     <Stack sx={{ p: 1 }} direction="column" gap={1} alignItems={"flex-start"}>
