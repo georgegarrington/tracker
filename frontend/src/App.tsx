@@ -41,7 +41,7 @@ export default function App() {
         <Drawer variant="permanent" anchor="left" sx={{ width: drawerWidth, '& .MuiDrawer-paper': { width: drawerWidth } }}>
           <Toolbar />
           {/* <Box sx={{ width: 240, bgcolor: 'red', height: '100%' }}> */}
-          <List>
+          {/* <List>
             <ListItem key={1}>
               <ListItemButton>
                 <ListItemIcon>
@@ -60,18 +60,18 @@ export default function App() {
                 <ListItemText primary={"Dashboard"} />
               </ListItemButton>
             </ListItem>
-          </List>
+          </List> */}
           
           {/* </Box> */}
         </Drawer>
-
+{/* 
         <Box component="main" sx={{ flexGrow: 1, p: 3, ml: `${drawerWidth}px` }}>
           <Toolbar />
           <Routes>
             <Route path="/one" element={<div>One</div>} />
             <Route path="/two" element={<div>Two</div>} />
           </Routes>
-        </Box>
+        </Box> */}
 
         {/* <Typography>test</Typography> */}
       </Box>
