@@ -8,21 +8,21 @@ CREATE TABLE coding_problems (
     name TEXT NOT NULL,
     source TEXT NOT NULL,
     difficulty TEXT CHECK (difficulty IN ("Easy", "Medium", "Hard")),
-    url TEXT,
+    url TEXT
 );
 
 CREATE TABLE coding_tags (
     id INTEGER PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL,
-)
+    name TEXT NOT NULL
+);
 
 CREATE TABLE coding_problem_tags (
     problem_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
     PRIMARY KEY (problem_id, tag_id),
-    FOREIGN KEY (problem_id) REFERENCES coding_problems(id) NOT NULL,
-    FOREIGN KEY (tag_id) REFERENCES coding_tags(id) NOT NULL,
-)
+    FOREIGN KEY (problem_id) REFERENCES coding_problems(id),
+    FOREIGN KEY (tag_id) REFERENCES coding_tags(id)
+);
 
 CREATE INDEX idx_coding_problem_id ON coding_problem_tags (problem_id);
 CREATE INDEX idx_coding_tag_id ON coding_problem_tags (tag_id);
@@ -34,7 +34,7 @@ CREATE TABLE coding_attempts (
     difficulty TEXT NOT NULL CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     needed_help TEXT NOT NULL CHECK (needed_help IN ("Yes", "No", "Kinda")),
     notes TEXT,
-    FOREIGN KEY (problem_id) REFERENCES coding_problems(id) NOT NULL,
+    FOREIGN KEY (problem_id) REFERENCES coding_problems(id)
 );
 
 CREATE INDEX idx_coding_attempt_problem_id ON coding_attempts (problem_id);
@@ -49,21 +49,21 @@ CREATE TABLE sysdesign_problems (
     name TEXT NOT NULL,
     source TEXT NOT NULL,
     difficulty TEXT CHECK (difficulty IN ("Easy", "Medium", "Hard")),
-    url TEXT,
+    url TEXT
 );
 
 CREATE TABLE sysdesign_tags (
     id INTEGER PRIMARY KEY NOT NULL,
-    name TEXT NOT NULL,
-)
+    name TEXT NOT NULL
+);
 
 CREATE TABLE sysdesign_problem_tags (
     problem_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
     PRIMARY KEY (problem_id, tag_id),
-    FOREIGN KEY (problem_id) REFERENCES sysdesign_problems(id) NOT NULL,
-    FOREIGN KEY (tag_id) REFERENCES sysdesign_tags(id) NOT NULL,
-)
+    FOREIGN KEY (problem_id) REFERENCES sysdesign_problems(id),
+    FOREIGN KEY (tag_id) REFERENCES sysdesign_tags(id)
+);
 
 CREATE INDEX idx_sysdesign_problem_id ON sysdesign_problem_tags (problem_id);
 CREATE INDEX idx_sysdesign_tag_id ON sysdesign_problem_tags (tag_id);
@@ -75,7 +75,7 @@ CREATE TABLE sysdesign_attempts (
     difficulty TEXT NOT NULL CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     needed_help TEXT NOT NULL CHECK (needed_help IN ("Yes", "No", "Kinda")),
     notes TEXT,
-    FOREIGN KEY (problem_id) REFERENCES coding_problems(id) NOT NULL,
+    FOREIGN KEY (problem_id) REFERENCES sysdesign_problems(id)
 );
 
 CREATE INDEX idx_sysdesign_attempt_problem_id ON sysdesign_attempts (problem_id);
@@ -91,8 +91,11 @@ def generate_sqlite_schema() -> None:
         settings.DB_PATH
     )
 
-    conn.execute(CREATE_CODING_PROBLEMS_SCHEMA)
-    conn.execute(CREATE_SYSDESIGN_SCHEMA)
+    conn.executescript(CREATE_CODING_PROBLEMS_SCHEMA)
+    conn.executescript(CREATE_SYSDESIGN_SCHEMA)
 
     conn.commit()
     conn.close()
+
+if __name__ == "__main__":
+    generate_sqlite_schema()
