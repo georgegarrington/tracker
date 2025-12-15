@@ -7,7 +7,6 @@ CREATE TABLE coding_problems (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     source TEXT NOT NULL,
-    difficulty TEXT CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     url TEXT
 );
 
@@ -48,7 +47,6 @@ CREATE TABLE sysdesign_problems (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     source TEXT NOT NULL,
-    difficulty TEXT CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     url TEXT
 );
 
