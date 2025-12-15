@@ -5,11 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi==0.123.*",
+    "fastapi==0.124.*",
     "more-itertools==10.*",
-    "SQLAlchemy==2.0.*",
     "uvicorn==0.38.*",
     "pydantic==2.12.*",
+    "pydantic-settings==2.12.*",
 ]
 
 [project.scripts]
@@ -17,9 +17,10 @@ tracker = "tracker.__main__:main"
 
 [dependency-groups]
 dev = [
+    "alembic==1.17.*",
     "ipykernel==7.1.*",
-    "mypy==1.*",
+    "mypy==1.19.*",
     "pydantic-settings==2.*",
     "requests==2.32.*",
-    "ruff==0.*",
+    "ruff==0.14.*",
 ]
