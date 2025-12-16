@@ -14,6 +14,7 @@ export function CodingProblemAutocomplete() {
       allOptions={problems}
       label="Problem name"
       placeholder="Type problem name here"
+      noOptionsText="New coding problem!"
     />
     // return <Autocomplete
     //   freeSolo

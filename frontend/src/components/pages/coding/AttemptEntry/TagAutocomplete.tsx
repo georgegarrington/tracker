@@ -13,6 +13,7 @@ export function TagAutocomplete() {
       allOptions={tags}
       label="Tags"
       placeholder="Type tags here"
+      noOptionsText="New tag!"
     />
   );
 }
