@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate": "yarn openapi-typescript http://localhost:8791/openapi.json -o /Users/georgegarrington/source/tracker/frontend/src/generated/schema.d.ts",
+    "gen": "yarn generate",
     "format": "prettier --write .",
     "fmt": "yarn format",
     "tc": "tsc --noEmit"

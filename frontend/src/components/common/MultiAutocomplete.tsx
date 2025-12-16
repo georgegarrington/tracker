@@ -60,7 +60,7 @@ export function MultiAutocomplete({
       <input
         type="hidden"
         name={formName}
-        value={"[" + selectedOptions.join(",") + "]"}
+        value={"[" + selectedOptions.map((s) => `"${s}"`).join(",") + "]"}
       />
       {userText && noOptionsText && menuOptions.length === 0 && (
         <FormHelperText sx={{ ml: 1 }}>{noOptionsText}</FormHelperText>

@@ -41,10 +41,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/v1/record-coding-attempt": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Record Coding Attempt
+     * @description * Get all existing problems - check if this is a new problem or not.
+     *     * If it is then create it in the DB
+     *     * Get all existings tags - check if any tags are new then create them
+     *     * Check
+     */
+    post: operations["record_coding_attempt_v1_record_coding_attempt_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components["schemas"]["ValidationError"][];
+    };
     /** Person */
     Person: {
       /** Name */
@@ -58,6 +86,38 @@ export interface components {
       tags: string[];
       /** Problems */
       problems: string[];
+    };
+    /** RecordCodingAttemptRequest */
+    RecordCodingAttemptRequest: {
+      /** Problem */
+      problem: string;
+      /**
+       * Difficulty
+       * @enum {string}
+       */
+      difficulty: "Easy" | "Medium" | "Hard";
+      /**
+       * Needed Help
+       * @enum {string}
+       */
+      needed_help: "Yes" | "No" | "Kinda";
+      /** Minutes Taken */
+      minutes_taken: number;
+      /** Tags */
+      tags: string[];
+      /** Url */
+      url: string | null;
+      /** Notes */
+      notes: string | null;
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
     };
   };
   responses: never;
@@ -104,6 +164,39 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["RecordCodingAttemptData"];
+        };
+      };
+    };
+  };
+  record_coding_attempt_v1_record_coding_attempt_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["RecordCodingAttemptRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": null;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
         };
       };
     };

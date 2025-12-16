@@ -5,19 +5,31 @@ import { DifficultyEntry } from "./DifficultyEntry";
 import { TypedSelect } from "../../../common/TypedSelect";
 import { DateEntry } from "./DateEntry";
 import { DurationEntry } from "../../../common/DurationEntry";
+import { recordCodingAttempt } from "./helpers/recordCodingAttempt";
+import { useTrackerContext } from "../../../../context";
+import { useNavigate } from "react-router-dom";
 
 export function AttemptEntry() {
+  const { client } = useTrackerContext();
+  const navigate = useNavigate();
+
   return (
     <Stack
       direction="column"
       component="form"
       gap={1}
       sx={{ width: "100%", p: 1 }}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries());
         console.log("Form data submitted:", data);
+        try {
+          await recordCodingAttempt(client, data as any);
+          navigate("/coding");
+        } catch (error) {
+          console.error("Failed to record coding attempt:", error);
+        }
       }}
     >
       <CodingProblemAutocomplete />
@@ -27,7 +39,11 @@ export function AttemptEntry() {
         <DateEntry />
         <DurationEntry label="Time taken" />
         <DifficultyEntry />
-        <TypedSelect label="Needed help?" options={["Yes", "No", "Kinda"]} />
+        <TypedSelect
+          name="neededHelp"
+          label="Needed help?"
+          options={["Yes", "No", "Kinda"]}
+        />
       </Stack>
       <TagAutocomplete />
       <TextField name="notes" label="Notes" minRows={16} multiline />
