@@ -6,7 +6,6 @@ CREATE_CODING_PROBLEMS_SCHEMA = """
 CREATE TABLE coding_problems (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    source TEXT NOT NULL,
     url TEXT
 );
 
@@ -46,7 +45,6 @@ CREATE_SYSDESIGN_SCHEMA = """
 CREATE TABLE sysdesign_problems (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
-    source TEXT NOT NULL,
     url TEXT
 );
 

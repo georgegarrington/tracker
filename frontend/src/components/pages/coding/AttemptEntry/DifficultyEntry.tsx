@@ -6,6 +6,7 @@ export function DifficultyEntry(props: SelectProps<Difficulty>) {
   return (
     <TypedSelect
       {...props}
+      name="difficulty"
       label="Difficulty"
       options={[...DifficultyVariants]}
     />

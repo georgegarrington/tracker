@@ -10,6 +10,7 @@ export function TagAutocomplete() {
 
   return (
     <MultiAutocomplete
+      formName="tags"
       allOptions={tags}
       label="Tags"
       placeholder="Type tags here"

@@ -11,6 +11,7 @@ export function CodingProblemAutocomplete() {
 
   return (
     <SingleAutocomplete
+      formName="problemName"
       allOptions={problems}
       label="Problem name"
       placeholder="Type problem name here"

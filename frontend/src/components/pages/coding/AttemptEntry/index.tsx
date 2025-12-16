@@ -13,8 +13,15 @@ export function AttemptEntry() {
       component="form"
       gap={1}
       sx={{ width: "100%", p: 1 }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
+        console.log("Form data submitted:", data);
+      }}
     >
       <CodingProblemAutocomplete />
+      <TextField label="URL" name="url" />
       <Stack direction="row" gap={1}>
         {/* Additional form fields can be added here */}
         <DateEntry />
@@ -23,8 +30,8 @@ export function AttemptEntry() {
         <TypedSelect label="Needed help?" options={["Yes", "No", "Kinda"]} />
       </Stack>
       <TagAutocomplete />
-      <TextField label="Notes" minRows={16} multiline />
-      <Button href="/coding" variant="contained" sx={{ alignSelf: "center" }}>
+      <TextField name="notes" label="Notes" minRows={16} multiline />
+      <Button variant="contained" sx={{ alignSelf: "center" }} type="submit">
         Record attempt
       </Button>
     </Stack>

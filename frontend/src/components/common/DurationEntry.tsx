@@ -15,6 +15,7 @@ export function DurationEntry(props: TextFieldProps) {
   return (
     <TextField
       {...props}
+      name="duration"
       error={isError}
       fullWidth
       onChange={(e) => setValue(e.target.value)}

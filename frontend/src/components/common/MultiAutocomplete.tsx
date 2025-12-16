@@ -7,11 +7,13 @@ import {
 import { useMemo, useState } from "react";
 
 export function MultiAutocomplete({
+  formName,
   allOptions,
   label,
   placeholder,
   noOptionsText,
 }: {
+  formName: string;
   allOptions: string[];
   label?: string;
   placeholder?: string;
@@ -42,10 +44,10 @@ export function MultiAutocomplete({
         freeSolo
         multiple
         options={availableOptions}
-        onInputChange={(_, value, reason) => {
-          if (reason === "input") {
-            setUserText(value);
-          }
+        onInputChange={(_evt, value, _reason) => {
+          // if (reason === "input") {
+          setUserText(value);
+          // }
         }}
         onChange={(_, value) => {
           console.log("New val: ", JSON.stringify(value));
@@ -54,6 +56,11 @@ export function MultiAutocomplete({
         renderInput={(params) => (
           <TextField {...params} label={label} placeholder={placeholder} />
         )}
+      />
+      <input
+        type="hidden"
+        name={formName}
+        value={"[" + selectedOptions.join(",") + "]"}
       />
       {userText && noOptionsText && menuOptions.length === 0 && (
         <FormHelperText sx={{ ml: 1 }}>{noOptionsText}</FormHelperText>

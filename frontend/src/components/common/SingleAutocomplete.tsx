@@ -7,11 +7,13 @@ import {
 import { useMemo, useState } from "react";
 
 export function SingleAutocomplete({
+  formName,
   allOptions,
   label,
   placeholder,
   noOptionsText,
 }: {
+  formName: string;
   allOptions: string[];
   label?: string;
   placeholder?: string;
@@ -33,12 +35,17 @@ export function SingleAutocomplete({
         freeSolo
         options={allOptions}
         onInputChange={(_, value, reason) => {
-          if (reason === "input") {
-            setUserText(value);
-          }
+          // if (reason === "input") {
+          setUserText(value);
+          // }
         }}
         renderInput={(params) => (
-          <TextField {...params} label={label} placeholder={placeholder} />
+          <TextField
+            {...params}
+            label={label}
+            placeholder={placeholder}
+            name={formName}
+          />
         )}
       />
       {userText && noOptionsText && menuOptions.length === 0 && (
