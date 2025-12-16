@@ -3,11 +3,7 @@ import type { ApplicationStatus } from "../../types/ApplicationStatus";
 import { useMemo } from "react";
 import type { Difficulty } from "../../types/common";
 
-export function DifficultyChip({
-  difficulty,
-}: {
-  difficulty: Difficulty;
-}) {
+export function DifficultyChip({ difficulty }: { difficulty: Difficulty }) {
   const [colour, text]: [
     (
       | "default"
@@ -21,12 +17,12 @@ export function DifficultyChip({
     string,
   ] = useMemo(() => {
     switch (difficulty) {
-        case "Easy":
-            return ["success", "Easy"];
-        case "Medium":
-            return ["warning", "Medium"];
-        case "Hard":
-            return ["error", "Hard"];
+      case "Easy":
+        return ["success", "Easy"];
+      case "Medium":
+        return ["warning", "Medium"];
+      case "Hard":
+        return ["error", "Hard"];
     }
   }, [difficulty]);
 

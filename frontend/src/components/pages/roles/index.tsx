@@ -2,22 +2,26 @@ import { Box, Button, Stack } from "@mui/material";
 import type { GridCellParams, GridColDef } from "@mui/x-data-grid";
 import { DataGrid } from "@mui/x-data-grid";
 import { ApplicationStatusChip } from "../../common/ApplicationStatusChip";
-import { ApplicationStatusVariants, type ApplicationStatus } from "../../../types/ApplicationStatus";
+import {
+  ApplicationStatusVariants,
+  type ApplicationStatus,
+} from "../../../types/ApplicationStatus";
 
 function getRoles() {
-
   const roles = [
-    { id: 1, recruiter: "Alex Goodall", firm: "GSA", status: "unstarted",
+    {
+      id: 1,
+      recruiter: "Alex Goodall",
+      firm: "GSA",
+      status: "unstarted",
       nextEvent: "No upcoming events",
-
-     },
+    },
     {
       id: 2,
       recruiter: "Alex Goodall",
       firm: "Citadel (NXT)",
       status: "unstarted",
       nextEvent: "No upcoming events",
-
     },
     {
       id: 3,
@@ -25,7 +29,6 @@ function getRoles() {
       firm: "Wintermute",
       status: "unstarted",
       nextEvent: "No upcoming events",
-
     },
     {
       id: 4,
@@ -33,7 +36,6 @@ function getRoles() {
       firm: "Millenium",
       status: "unstarted",
       nextEvent: "No upcoming events",
-
     },
     {
       id: 5,
@@ -101,11 +103,10 @@ function getRoles() {
       status: "unstarted",
       nextEvent: "No upcoming events",
       notes: "Ask if he can refer me",
-    }
+    },
   ];
 
   return roles;
-
 }
 
 export default function Roles() {
@@ -118,14 +119,14 @@ export default function Roles() {
       headerName: "Status",
       width: 200,
       type: "singleSelect",
-      valueOptions:[...ApplicationStatusVariants],
+      valueOptions: [...ApplicationStatusVariants],
       renderCell: (params: GridCellParams<any, ApplicationStatus>) =>
         params.value && (
           <ApplicationStatusChip applicationStatus={params.value} />
         ),
     },
     { field: "nextEvent", headerName: "Next Event", width: 200 },
-    {field: "notes", headerName: "Notes", width: 400 },
+    { field: "notes", headerName: "Notes", width: 400 },
     // { field: "description", headerName: "Description", width: 200 },
   ];
 
@@ -133,13 +134,10 @@ export default function Roles() {
 
   return (
     <Stack sx={{ p: 1 }} direction="column" gap={1} alignItems={"flex-start"}>
-      <Button 
-      startIcon={<>+</>}
-      variant="contained" 
-      color="secondary">
+      <Button startIcon={<>+</>} variant="contained" color="secondary">
         Add role
-        </Button>
-      <DataGrid columns={cols} rows={rows} sx={{width: "100%"}}/>
+      </Button>
+      <DataGrid columns={cols} rows={rows} sx={{ width: "100%" }} />
     </Stack>
   );
 }

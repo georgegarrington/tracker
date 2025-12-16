@@ -4,6 +4,8 @@ export type PageSpec = {
   content: JSX.Element;
   path: string;
 } & (
-  {  
-  label: string;} | {noDrawer: true}
-)
+  | {
+      label: string;
+    }
+  | { noDrawer: true }
+);

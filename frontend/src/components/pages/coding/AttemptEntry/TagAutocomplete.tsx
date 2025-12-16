@@ -1,28 +1,18 @@
+// import { getRecordCodingAttemptDataV1GetRecordCodingAttemptDataGet } from "../../../../tracker-client";
+import { useMemo } from "react";
+import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
 import { MultiAutocomplete } from "../../../common/MultiAutocomplete";
 
-export function TagAutocomplete(
-    {existingTags}: {existingTags: string[]}
-) {
+export function TagAutocomplete() {
+  const { tags } = useGetRecordCodingAttemptData();
 
-    return <MultiAutocomplete
-      allOptions={existingTags}
+  // const tags = useMemo(() => response ? response.tags : [], [response]);
+
+  return (
+    <MultiAutocomplete
+      allOptions={tags}
       label="Tags"
       placeholder="Type tags here"
     />
-
-  // return <Autocomplete
-  //   freeSolo
-  //   multiple
-  //   options={existingTags}
-  //   // sx={{
-  //   //     width: 300,
-  //   // }}
-  //   renderInput={params => 
-  //   <TextField 
-  //   {...params} 
-  //   label="Tags"
-  //    placeholder="Type tags here" />}
-  //   />
-  
-  ;
+  );
 }

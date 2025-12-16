@@ -1,4 +1,10 @@
-import { Autocomplete, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { CodingProblemAutocomplete } from "./AttemptEntry/CodingProblemAutocomplete";
 import { Tag } from "@mui/icons-material";
 import { TagAutocomplete } from "./AttemptEntry/TagAutocomplete";
@@ -7,10 +13,8 @@ import { get } from "es-toolkit/compat";
 import { CodingAttemptTable } from "./CodingAttemptGrid";
 
 function getExistingProblems(): string[] {
-  return [
-    "Two Sum",
-  ];
-  }
+  return ["Two Sum"];
+}
 
 function getExistingTags(): string[] {
   return [
@@ -26,23 +30,25 @@ function getExistingTags(): string[] {
     "depth-first search",
     "breadth-first search",
     "recursion",
-  ]
+  ];
 }
 
 export default function Coding() {
-  return <Stack direction = "column" sx = {{p: 1}} alignItems="flex-start" gap={1}>
-    {/* <AttemptEntry
+  return (
+    <Stack direction="column" sx={{ p: 1 }} alignItems="flex-start" gap={1}>
+      {/* <AttemptEntry
     existingProblems={getExistingProblems()}
     existingTags={getExistingTags()}
     /> */}
-          <Button 
-
-      href="/coding/new_attempt"
-      startIcon={<>+</>}
-      variant="contained" 
-      color="secondary">
+      <Button
+        href="/coding/new_attempt"
+        startIcon={<>+</>}
+        variant="contained"
+        color="secondary"
+      >
         Record attempt
-        </Button>
-    <CodingAttemptTable/>
-  </Stack>
+      </Button>
+      <CodingAttemptTable />
+    </Stack>
+  );
 }

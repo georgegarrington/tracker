@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate": "openapi-ts",
+    "generate": "yarn openapi-typescript http://localhost:8791/openapi.json -o /Users/georgegarrington/source/tracker/frontend/src/generated/schema.d.ts",
     "format": "prettier --write .",
     "fmt": "yarn format",
     "tc": "tsc --noEmit"
@@ -27,11 +27,11 @@
     "react-dom": "^19.2.0",
     "react-router": "^7.10.1",
     "react-router-dom": "^7.10.1",
-    "@mantine/hooks": "^8.3.10"
+    "@mantine/hooks": "^8.3.10",
+    "openapi-fetch": "^0.15.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@hey-api/openapi-ts": "0.88.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -44,6 +44,7 @@
     "prettier": "^3.0.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "openapi-typescript": "^7.10.1"
   }
 }

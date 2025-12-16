@@ -1,13 +1,15 @@
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export function DateEntry() {
-    return <DatePicker 
-    format="yyyy-MM-dd"
-    disableFuture
-    slotProps= {{
+  return (
+    <DatePicker
+      format="yyyy-MM-dd"
+      disableFuture
+      slotProps={{
         textField: {
-            fullWidth: true,
-        }
-    }}
+          fullWidth: true,
+        },
+      }}
     />
+  );
 }
