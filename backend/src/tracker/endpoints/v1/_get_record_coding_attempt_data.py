@@ -1,4 +1,4 @@
-from tracker.db.fns import get_all_coding_tags, get_all_coding_problems
+from tracker.db.fns import get_coding_tag_map, get_coding_problem_map
 from tracker.endpoints.v1.models.responses._record_coding_attempt_data import RecordCodingAttemptData
 
 async def get_record_coding_attempt_data() -> RecordCodingAttemptData:
@@ -7,8 +7,8 @@ async def get_record_coding_attempt_data() -> RecordCodingAttemptData:
     """
     
     return RecordCodingAttemptData(
-        tags = list(get_all_coding_tags().keys()),
-        problems=get_all_coding_problems(),
+        tags = list(get_coding_tag_map().keys()),
+        problems=list(get_coding_problem_map().keys()),
     )
 
 __all__ = [
