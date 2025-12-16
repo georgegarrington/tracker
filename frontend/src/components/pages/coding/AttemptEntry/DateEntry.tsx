@@ -4,6 +4,7 @@ export function DateEntry() {
   return (
     <DatePicker
       format="yyyy-MM-dd"
+      defaultValue={new Date()}
       disableFuture
       slotProps={{
         textField: {

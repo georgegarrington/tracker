@@ -29,7 +29,7 @@ CREATE INDEX idx_coding_tag_id ON coding_problem_tags (tag_id);
 CREATE TABLE coding_attempts (
     problem_id INTEGER NOT NULL,
     attempt_time TIMESTAMP NOT NULL,
-    seconds_taken INTEGER NOT NULL,
+    minutes_taken INTEGER NOT NULL,
     difficulty TEXT NOT NULL CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     needed_help TEXT NOT NULL CHECK (needed_help IN ("Yes", "No", "Kinda")),
     notes TEXT,
@@ -69,7 +69,7 @@ CREATE INDEX idx_sysdesign_tag_id ON sysdesign_problem_tags (tag_id);
 CREATE TABLE sysdesign_attempts (
     problem_id INTEGER NOT NULL,
     attempt_time TIMESTAMP NOT NULL,
-    seconds_taken INTEGER NOT NULL,
+    minutes_taken INTEGER NOT NULL,
     difficulty TEXT NOT NULL CHECK (difficulty IN ("Easy", "Medium", "Hard")),
     needed_help TEXT NOT NULL CHECK (needed_help IN ("Yes", "No", "Kinda")),
     notes TEXT,

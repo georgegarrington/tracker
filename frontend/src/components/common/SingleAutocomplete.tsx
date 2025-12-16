@@ -41,7 +41,7 @@ export function SingleAutocomplete({
           <TextField {...params} label={label} placeholder={placeholder} />
         )}
       />
-      {noOptionsText && menuOptions.length === 0 && (
+      {userText && noOptionsText && menuOptions.length === 0 && (
         <FormHelperText sx={{ ml: 1 }}>{noOptionsText}</FormHelperText>
       )}
     </>
