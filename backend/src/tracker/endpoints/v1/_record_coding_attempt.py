@@ -16,8 +16,9 @@ from tracker.db.fns import (
 from tracker.utils.misc._flip_dict import flip_dict
 
 
-def update_tags(conn: Connection, tags: list[str], problem_id: int) -> tuple[dict[str, int], set[str]]:
-    
+def update_tags(
+    conn: Connection, tags: list[str], problem_id: int
+) -> tuple[dict[str, int], set[str]]:
     tag_map = get_coding_tag_map(conn)
     ids_to_tags = flip_dict(tag_map)
     all_existing_tags = set(tag_map.keys())
@@ -79,7 +80,6 @@ async def record_coding_attempt(request: RecordCodingAttemptRequest) -> None:
     # Then, in a separate transaction, check if any of the removed tags are unused by any problem, then remove them
 
     with db_connection() as conn:
-
         for tag in removed_tags:
             print("Checking tag for removal:", tag)
             tag_id = tag_map[tag]
