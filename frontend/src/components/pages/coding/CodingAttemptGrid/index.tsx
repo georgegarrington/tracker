@@ -3,13 +3,14 @@ import {
   type GridCellParams,
   type GridColDef,
 } from "@mui/x-data-grid";
-import type { Difficulty, NeededHelp } from "../../../../types/common";
+import { DifficultyVariants, NeededHelpVariants, type Difficulty, type NeededHelp } from "../../../../types/common";
 import { DifficultyChip } from "../../../common/DifficultyChip";
 import { Box } from "@mui/material";
 import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
 import { useGetCodingAttempts } from "../../../../hooks/endpoint/useGetCodingAttempts";
 import { NeededHelpChip } from "../../../common/NeededHelpChip";
 import { HashChip } from "../../../common/HashChip";
+import { orderBy } from "es-toolkit/compat";
 
 export function CodingAttemptTable() {
   const columns: GridColDef[] = [
@@ -23,6 +24,9 @@ export function CodingAttemptTable() {
       headerName: "Difficulty",
       renderCell: ({ value }: GridCellParams<any, Difficulty>) =>
         value && <DifficultyChip difficulty={value} />,
+      sortComparator: (v1, v2) => 
+        DifficultyVariants.indexOf(v1) - DifficultyVariants.indexOf(v2)
+      
     },
     {
       field: "needed_help",
@@ -30,6 +34,8 @@ export function CodingAttemptTable() {
       width: 120,
       renderCell: ({ value }: GridCellParams<any, NeededHelp>) =>
         value && <NeededHelpChip neededHelp={value} />,
+      sortComparator: (v1, v2) => 
+        NeededHelpVariants.indexOf(v1) - NeededHelpVariants.indexOf(v2)
     },
     {
       field: "attempt_time",
