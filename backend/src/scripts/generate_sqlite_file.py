@@ -58,7 +58,6 @@ CREATE TABLE sysdesign_problem_tags (
     id INTEGER PRIMARY KEY NOT NULL,
     problem_id INTEGER NOT NULL,
     tag_id INTEGER NOT NULL,
-    PRIMARY KEY (problem_id, tag_id),
     FOREIGN KEY (problem_id) REFERENCES sysdesign_problems(id),
     FOREIGN KEY (tag_id) REFERENCES sysdesign_tags(id)
 );
