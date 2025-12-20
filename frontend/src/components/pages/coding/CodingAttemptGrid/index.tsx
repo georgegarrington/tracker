@@ -58,6 +58,11 @@ export function CodingAttemptTable() {
       sx={{ width: "100%" }}
       rows={attempts}
       columns={columns}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: "attempt_time", sort: "desc" }],
+        }
+      }}
       autoHeight
     />
   );
