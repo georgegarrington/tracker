@@ -52,9 +52,8 @@ export function CodingAttemptTable() {
       field: "tags",
       headerName: "Tags",
       width: 400,
-      // width: 300,
       renderCell: ({ value: tags }: GridCellParams<any, string[]>) =>
-        tags?.map((tag, i) => (
+        tags?.sort().map((tag, i) => (
           <HashChip sx={{ mr: 0.5 }} key={i} value={tag} />
         )) || <Box />,
     },
