@@ -3,7 +3,7 @@ import { CodingProblemAutocomplete } from "./CodingProblemAutocomplete";
 import { TagAutocomplete } from "./TagAutocomplete";
 import { DifficultyEntry } from "./DifficultyEntry";
 import { TypedSelect } from "../../../common/TypedSelect";
-import { DateEntry } from "./DateEntry";
+import { TimeEntry } from "./TimeEntry";
 import { DurationEntry } from "../../../common/DurationEntry";
 import { recordCodingAttempt } from "./helpers/recordCodingAttempt";
 import { useTrackerContext } from "../../../../context";
@@ -36,7 +36,7 @@ export function AttemptEntry() {
       <TextField label="URL" name="url" />
       <Stack direction="row" gap={1}>
         {/* Additional form fields can be added here */}
-        <DateEntry />
+        <TimeEntry />
         <DurationEntry label="Time taken" />
         <DifficultyEntry />
         <TypedSelect

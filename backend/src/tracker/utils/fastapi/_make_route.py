@@ -7,10 +7,9 @@ def make_route(
     method: Literal["GET", "POST"],
     endpoint: Callable[..., Any],
 ) -> APIRoute:
-    
     return APIRoute(
-        path = path,
-        methods = [method],
-        endpoint = endpoint,
+        path=path,
+        methods=[method],
+        endpoint=endpoint,
         response_model=get_type_hints(endpoint).get("return"),
     )

@@ -1,10 +1,10 @@
-
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from tracker.utils.fastapi._make_route import make_route
 from tracker.endpoints.v1 import get_record_coding_attempt_data, record_coding_attempt
+
 
 class Person(BaseModel):
     name: str

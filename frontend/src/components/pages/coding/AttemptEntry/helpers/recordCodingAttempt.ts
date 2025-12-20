@@ -9,6 +9,7 @@ export async function recordCodingAttempt(
     problemName: string;
     difficulty: Difficulty;
     neededHelp: NeededHelp;
+    time: string;
     minutesTaken: string;
     tags: string;
     url: string | null;
@@ -21,6 +22,7 @@ export async function recordCodingAttempt(
     neededHelp,
     url,
     notes,
+    time,
   } = rawFormData;
 
   const [_, hours, mins] = rawFormData.minutesTaken.match(
@@ -39,6 +41,7 @@ export async function recordCodingAttempt(
       tags,
       url,
       notes,
+      time,
     },
   });
 

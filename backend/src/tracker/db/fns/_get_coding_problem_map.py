@@ -1,13 +1,12 @@
-from tracker.db.utils._db_connection import db_connection
+from sqlite3 import Connection
+# from tracker.db.utils._db_connection import db_connection
 
-def get_coding_problem_map() -> dict[str, int]:
 
-    with db_connection() as conn:
+def get_coding_problem_map(conn: Connection) -> dict[str, int]:
+    rows = conn.execute(
+        """
+        SELECT name, id FROM coding_problems;
+        """
+    ).fetchall()
 
-        rows = conn.execute(
-            """
-            SELECT name, id FROM coding_problems;
-            """
-        ).fetchall()
-
-        return dict(rows)
+    return dict(rows)

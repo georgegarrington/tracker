@@ -1,13 +1,10 @@
-from tracker.db.utils._db_connection import db_connection
+from sqlite3 import Connection
 
-def get_coding_tag_map() -> dict[str, int]:
+def get_coding_tag_map(conn: Connection) -> dict[str, int]:
+    rows = conn.execute(
+        """
+        SELECT name, id FROM coding_tags;
+        """
+    ).fetchall()
 
-    with db_connection() as conn:
-
-        rows = conn.execute(
-            """
-            SELECT name, id FROM coding_tags;
-            """
-        ).fetchall()
-
-        return dict(rows)
+    return dict(rows)

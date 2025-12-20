@@ -2,6 +2,7 @@ from typing import NamedTuple
 from tracker.types import Difficulty, NeededHelp
 import datetime
 
+
 class CodingAttempt(NamedTuple):
     problem_name: str
     difficulty: Difficulty

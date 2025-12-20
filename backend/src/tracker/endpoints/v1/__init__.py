@@ -11,5 +11,5 @@ __all__ = [
     "get_sysdesign_attempt_data",
     "record_coding_attempt",
     "record_sysdesign_attempt",
-    "get_record_coding_attempt_data",   
+    "get_record_coding_attempt_data",
 ]

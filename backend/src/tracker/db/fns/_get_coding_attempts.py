@@ -1,4 +1,3 @@
-
 from tracker.db.utils import db_connection
 
 GEMINI = """
@@ -34,15 +33,15 @@ ORDER BY la.attempt_time DESC;
 
 """
 
+
 def get_coding_attempts() -> None:
     """
     Get joined view of coding attempt data
     """
 
     with db_connection() as conn:
-
         conn.execute(
-        """
+            """
 
         WITH ranked_attempts AS (
             SELECT 

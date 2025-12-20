@@ -1,4 +1,3 @@
-
 def delete_coding_tag() -> None:
     """
     1. make sure coding tag isn't used by any problem
