@@ -3,7 +3,11 @@ from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from tracker.utils.fastapi._make_route import make_route
-from tracker.endpoints.v1 import get_record_coding_attempt_data, record_coding_attempt
+from tracker.endpoints.v1 import (
+    get_record_coding_attempt_data,
+    record_coding_attempt,
+    get_coding_attempts,
+)
 
 
 class Person(BaseModel):
@@ -35,6 +39,11 @@ def make_service() -> FastAPI:
                 path="/v1/record-coding-attempt",
                 method="POST",
                 endpoint=record_coding_attempt,
+            ),
+            make_route(
+                path="/v1/get-coding-attempts",
+                method="GET",
+                endpoint=get_coding_attempts,
             ),
         ],
     )

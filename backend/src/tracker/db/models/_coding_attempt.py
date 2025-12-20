@@ -1,13 +1,15 @@
-from typing import NamedTuple
+# from typing import NamedTuple
 from tracker.types import Difficulty, NeededHelp
 import datetime
+from pydantic import BaseModel
 
 
-class CodingAttempt(NamedTuple):
+class CodingAttempt(BaseModel):
+    id: int
     problem_name: str
     difficulty: Difficulty
     needed_help: NeededHelp
     attempt_time: datetime.datetime
-    seconds_taken: int
+    minutes_taken: int
     tags: list[str]
     notes: str | None

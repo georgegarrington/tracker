@@ -6,11 +6,13 @@ import {
 import type { Difficulty } from "../../../../types/common";
 import { DifficultyChip } from "../../../common/DifficultyChip";
 import { Box } from "@mui/material";
+import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
+import { useGetCodingAttempts } from "../../../../hooks/endpoint/useGetCodingAttempts";
 
 export function CodingAttemptTable() {
   const columns: GridColDef[] = [
     {
-      field: "problem",
+      field: "problem_name",
       headerName: "Problem",
     },
     {
@@ -20,12 +22,17 @@ export function CodingAttemptTable() {
         value && <DifficultyChip difficulty={value} />,
     },
     {
-      field: "date",
-      headerName: "Attempt Date",
-      width: 150,
+      field: "needed_help",
+      headerName: "Needed Help",
+      width: 130,
     },
     {
-      field: "timeTaken",
+      field: "attempt_time",
+      headerName: "Attempt Time",
+      width: 170,
+    },
+    {
+      field: "minutes_taken",
       headerName: "Time Taken",
     },
     {
@@ -40,18 +47,12 @@ export function CodingAttemptTable() {
     },
   ];
 
+  const {attempts} = useGetCodingAttempts();
+
   return (
     <DataGrid
       sx={{ width: "100%" }}
-      rows={[
-        {
-          id: 1,
-          problem: "Two Sum",
-          difficulty: "Easy",
-          date: "2024-01-01",
-          timeTaken: "15 min",
-        },
-      ]}
+      rows={attempts}
       columns={columns}
       autoHeight
     />

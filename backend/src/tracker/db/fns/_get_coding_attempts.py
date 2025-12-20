@@ -1,68 +1,77 @@
-from tracker.db.utils import db_connection
-
-GEMINI = """
-
-WITH LatestAttempts AS (
-    SELECT 
-        problem_id,
-        difficulty,
-        attempt_time,
-        notes,
-        ROW_NUMBER() OVER (PARTITION BY problem_id ORDER BY attempt_time DESC) AS rn
-    FROM coding_attempts
-),
-ProblemTags AS (
-    SELECT 
-        cpt.problem_id,
-        GROUP_CONCAT(ct.name, ', ') AS tag_list
-    FROM coding_problem_tags cpt
-    JOIN coding_tags ct ON ct.id = cpt.tag_id
-    GROUP BY cpt.problem_id
-)
-SELECT 
-    cp.name AS problem_name,
-    la.difficulty,
-    la.attempt_time,
-    pt.tag_list AS tags,
-    la.notes
-FROM LatestAttempts la
-JOIN coding_problems cp ON cp.id = la.problem_id
-LEFT JOIN ProblemTags pt ON pt.problem_id = la.problem_id
-WHERE la.rn = 1
-ORDER BY la.attempt_time DESC;
-
-"""
+from sqlite3 import Connection
+from tracker.db.models._coding_attempt import CodingAttempt
+from tracker.db.utils import db_connection, parse_group_concat
 
 
-def get_coding_attempts() -> None:
+def get_coding_attempts(conn: Connection) -> list[CodingAttempt]:
     """
     Get joined view of coding attempt data
     """
 
     with db_connection() as conn:
-        conn.execute(
+        raw_rows = conn.execute(
             """
 
-        WITH ranked_attempts AS (
+        WITH LatestAttempts AS (
             SELECT 
-                ca.*,
+                id,
+                problem_id,
+                difficulty,
+                attempt_time,
+                minutes_taken,
+                needed_help,
+                notes,
                 ROW_NUMBER() OVER (PARTITION BY problem_id ORDER BY attempt_time DESC) AS rn
-            FROM coding_attempts ca
+            FROM coding_attempts
+        ),
+        ProblemTags AS (
+            SELECT 
+                cpt.problem_id,
+                GROUP_CONCAT(ct.name, ', ') AS tag_list
+            FROM coding_problem_tags cpt
+            JOIN coding_tags ct ON ct.id = cpt.tag_id
+            GROUP BY cpt.problem_id
         )
         SELECT 
+            la.id,
             cp.name AS problem_name,
-            ra.difficulty,
-            ra.attempt_time,
-            GROUP_CONCAT(ct.name, ', ') AS tags,
-            ra.notes
-        FROM ranked_attempts ra
-        JOIN coding_problems cp ON cp.id = ra.problem_id
-        LEFT JOIN coding_problem_tags cpt ON cpt.problem_id = ra.problem_id
-        LEFT JOIN coding_tags ct ON ct.id = cpt.tag_id
-        WHERE ra.rn = 1
-        GROUP BY cp.name, ra.difficulty, ra.attempt_time, ra.notes
-        ORDER BY ra.attempt_time DESC;
+            la.difficulty,
+            la.needed_help,
+            la.attempt_time,
+            la.minutes_taken,
+            pt.tag_list,
+            la.notes
+        FROM LatestAttempts la
+        JOIN coding_problems cp ON cp.id = la.problem_id
+        LEFT JOIN ProblemTags pt ON pt.problem_id = la.problem_id
+        WHERE la.rn = 1
+        ORDER BY la.attempt_time DESC;
+
         """
-        )
+        ).fetchall()
+
+        return [
+            # CodingAttempt(*tup) for tup in raw_rows
+            CodingAttempt(
+                id=attempt_id,
+                problem_name=problem_name,
+                difficulty=difficulty,
+                needed_help=needed_help,
+                attempt_time=attempt_time,
+                minutes_taken=minutes_taken,
+                tags=parse_group_concat(raw_tags),
+                notes=notes,
+            )
+            for (
+                attempt_id,
+                problem_name,
+                difficulty,
+                needed_help,
+                attempt_time,
+                minutes_taken,
+                raw_tags,
+                notes,
+            ) in raw_rows
+        ]
 
     # pass
