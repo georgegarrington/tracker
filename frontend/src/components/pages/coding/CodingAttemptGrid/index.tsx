@@ -11,6 +11,7 @@ import { useGetCodingAttempts } from "../../../../hooks/endpoint/useGetCodingAtt
 import { NeededHelpChip } from "../../../common/NeededHelpChip";
 import { HashChip } from "../../../common/HashChip";
 import { orderBy } from "es-toolkit/compat";
+import { formatMinutes } from "../../../../utils";
 
 export function CodingAttemptTable() {
   const columns: GridColDef[] = [
@@ -45,6 +46,7 @@ export function CodingAttemptTable() {
     {
       field: "minutes_taken",
       headerName: "Time Taken",
+      renderCell: ({ value }: GridCellParams<any, number>) => value && formatMinutes(value),
     },
     {
       field: "tags",
