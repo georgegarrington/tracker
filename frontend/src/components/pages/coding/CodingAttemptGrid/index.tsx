@@ -3,17 +3,20 @@ import {
   type GridCellParams,
   type GridColDef,
 } from "@mui/x-data-grid";
-import type { Difficulty } from "../../../../types/common";
+import type { Difficulty, NeededHelp } from "../../../../types/common";
 import { DifficultyChip } from "../../../common/DifficultyChip";
 import { Box } from "@mui/material";
 import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
 import { useGetCodingAttempts } from "../../../../hooks/endpoint/useGetCodingAttempts";
+import { NeededHelpChip } from "../../../common/NeededHelpChip";
+import { HashChip } from "../../../common/HashChip";
 
 export function CodingAttemptTable() {
   const columns: GridColDef[] = [
     {
       field: "problem_name",
       headerName: "Problem",
+      width: 300,
     },
     {
       field: "difficulty",
@@ -24,7 +27,9 @@ export function CodingAttemptTable() {
     {
       field: "needed_help",
       headerName: "Needed Help",
-      width: 130,
+      width: 120,
+      renderCell: ({ value }: GridCellParams<any, NeededHelp>) =>
+        value && <NeededHelpChip neededHelp={value} />,
     },
     {
       field: "attempt_time",
@@ -39,15 +44,14 @@ export function CodingAttemptTable() {
       field: "tags",
       headerName: "Tags",
       width: 300,
-    },
-    {
-      field: "notes",
-      headerName: "Notes",
-      width: 300,
+      renderCell: ({ value: tags }: GridCellParams<any, string[]>) =>
+        tags?.map((tag, i) => (
+          <HashChip sx={{ mr: 0.5 }} key={i} value={tag} />
+        )) || <Box />,
     },
   ];
 
-  const {attempts} = useGetCodingAttempts();
+  const { attempts } = useGetCodingAttempts();
 
   return (
     <DataGrid

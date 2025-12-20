@@ -4,278 +4,278 @@
  */
 
 export interface paths {
-    "/v1/test": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Test Route */
-        get: operations["test_route_v1_test_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/v1/test": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/get-record-coding-attempt-data": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Record Coding Attempt Data
-         * @description Get the list of existing tags, and list of existing problems
-         */
-        get: operations["get_record_coding_attempt_data_v1_get_record_coding_attempt_data_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /** Test Route */
+    get: operations["test_route_v1_test_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/get-record-coding-attempt-data": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/record-coding-attempt": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Record Coding Attempt
-         * @description * Get all existing problems - check if this is a new problem or not.
-         *     * If it is then create it in the DB
-         *     * Get all existings tags - check if any tags are new then create them
-         *     * Check
-         */
-        post: operations["record_coding_attempt_v1_record_coding_attempt_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    /**
+     * Get Record Coding Attempt Data
+     * @description Get the list of existing tags, and list of existing problems
+     */
+    get: operations["get_record_coding_attempt_data_v1_get_record_coding_attempt_data_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/record-coding-attempt": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/v1/get-coding-attempts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Coding Attempts
-         * @description Does a DB join on all data to create the view in the webapp
-         */
-        get: operations["get_coding_attempts_v1_get_coding_attempts_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /**
+     * Record Coding Attempt
+     * @description * Get all existing problems - check if this is a new problem or not.
+     *     * If it is then create it in the DB
+     *     * Get all existings tags - check if any tags are new then create them
+     *     * Check
+     */
+    post: operations["record_coding_attempt_v1_record_coding_attempt_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/v1/get-coding-attempts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    /**
+     * Get Coding Attempts
+     * @description Does a DB join on all data to create the view in the webapp
+     */
+    get: operations["get_coding_attempts_v1_get_coding_attempts_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /** CodingAttempt */
-        CodingAttempt: {
-            /** Id */
-            id: number;
-            /** Problem Name */
-            problem_name: string;
-            /**
-             * Difficulty
-             * @enum {string}
-             */
-            difficulty: "Easy" | "Medium" | "Hard";
-            /**
-             * Needed Help
-             * @enum {string}
-             */
-            needed_help: "Yes" | "No" | "Kinda";
-            /**
-             * Attempt Time
-             * Format: date-time
-             */
-            attempt_time: string;
-            /** Minutes Taken */
-            minutes_taken: number;
-            /** Tags */
-            tags: string[];
-            /** Notes */
-            notes: string | null;
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /** Person */
-        Person: {
-            /** Name */
-            name: string;
-            /** Age */
-            age: number;
-        };
-        /** RecordCodingAttemptData */
-        RecordCodingAttemptData: {
-            /** All Tags */
-            all_tags: string[];
-            /** All Problems */
-            all_problems: string[];
-            /** Problems To Tags */
-            problems_to_tags: {
-                [key: string]: string[];
-            };
-        };
-        /** RecordCodingAttemptRequest */
-        RecordCodingAttemptRequest: {
-            /** Problem */
-            problem: string;
-            /**
-             * Difficulty
-             * @enum {string}
-             */
-            difficulty: "Easy" | "Medium" | "Hard";
-            /**
-             * Needed Help
-             * @enum {string}
-             */
-            needed_help: "Yes" | "No" | "Kinda";
-            /**
-             * Time
-             * Format: date-time
-             */
-            time: string;
-            /** Minutes Taken */
-            minutes_taken: number;
-            /** Tags */
-            tags: string[];
-            /** Url */
-            url: string | null;
-            /** Notes */
-            notes: string | null;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
+  schemas: {
+    /** CodingAttempt */
+    CodingAttempt: {
+      /** Id */
+      id: number;
+      /** Problem Name */
+      problem_name: string;
+      /**
+       * Difficulty
+       * @enum {string}
+       */
+      difficulty: "Easy" | "Medium" | "Hard";
+      /**
+       * Needed Help
+       * @enum {string}
+       */
+      needed_help: "Yes" | "No" | "Kinda";
+      /**
+       * Attempt Time
+       * Format: date-time
+       */
+      attempt_time: string;
+      /** Minutes Taken */
+      minutes_taken: number;
+      /** Tags */
+      tags: string[];
+      /** Notes */
+      notes: string | null;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components["schemas"]["ValidationError"][];
+    };
+    /** Person */
+    Person: {
+      /** Name */
+      name: string;
+      /** Age */
+      age: number;
+    };
+    /** RecordCodingAttemptData */
+    RecordCodingAttemptData: {
+      /** All Tags */
+      all_tags: string[];
+      /** All Problems */
+      all_problems: string[];
+      /** Problems To Tags */
+      problems_to_tags: {
+        [key: string]: string[];
+      };
+    };
+    /** RecordCodingAttemptRequest */
+    RecordCodingAttemptRequest: {
+      /** Problem */
+      problem: string;
+      /**
+       * Difficulty
+       * @enum {string}
+       */
+      difficulty: "Easy" | "Medium" | "Hard";
+      /**
+       * Needed Help
+       * @enum {string}
+       */
+      needed_help: "Yes" | "No" | "Kinda";
+      /**
+       * Time
+       * Format: date-time
+       */
+      time: string;
+      /** Minutes Taken */
+      minutes_taken: number;
+      /** Tags */
+      tags: string[];
+      /** Url */
+      url: string | null;
+      /** Notes */
+      notes: string | null;
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    test_route_v1_test_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Person"];
-                };
-            };
-        };
+  test_route_v1_test_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    get_record_coding_attempt_data_v1_get_record_coding_attempt_data_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["RecordCodingAttemptData"];
-                };
-            };
+        content: {
+          "application/json": components["schemas"]["Person"];
         };
+      };
     };
-    record_coding_attempt_v1_record_coding_attempt_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["RecordCodingAttemptRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": null;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
+  };
+  get_record_coding_attempt_data_v1_get_record_coding_attempt_data_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    get_coding_attempts_v1_get_coding_attempts_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CodingAttempt"][];
-                };
-            };
+        content: {
+          "application/json": components["schemas"]["RecordCodingAttemptData"];
         };
+      };
     };
+  };
+  record_coding_attempt_v1_record_coding_attempt_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["RecordCodingAttemptRequest"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": null;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  get_coding_attempts_v1_get_coding_attempts_get: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CodingAttempt"][];
+        };
+      };
+    };
+  };
 }
