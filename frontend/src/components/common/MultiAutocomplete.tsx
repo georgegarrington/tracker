@@ -24,9 +24,7 @@ export function MultiAutocomplete({
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   useEffect(() => {
-
-    if(defaultValues) setSelectedOptions(defaultValues);
-
+    if (defaultValues) setSelectedOptions(defaultValues);
   }, [defaultValues]);
 
   const availableOptions = useMemo(

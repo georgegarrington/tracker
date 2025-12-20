@@ -43,7 +43,7 @@ export function SingleAutocomplete({
           // }
         }}
         onChange={(_, value) => {
-          if(value && setSelection) setSelection(value);
+          if (value && setSelection) setSelection(value);
         }}
         renderInput={(params) => (
           <TextField

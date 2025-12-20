@@ -4,9 +4,13 @@ import { useTrackerContext } from "../../../../context";
 import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
 import type { UseStateSetter } from "../../../../types/common";
 
-export function CodingProblemAutocomplete(
-  {problems, setCodingProblem}: {problems: string[], setCodingProblem: UseStateSetter<string>}
-) {
+export function CodingProblemAutocomplete({
+  problems,
+  setCodingProblem,
+}: {
+  problems: string[];
+  setCodingProblem: UseStateSetter<string>;
+}) {
   // const { client } = useTrackerContext();
 
   // client.GET("/v1/get-record-coding-attempt-data");

@@ -16,12 +16,20 @@ export function useGetRecordCodingAttemptData() {
     });
   }, []);
 
-  const [tags, problems, problemsToTags]: [string[], string[], Record<string, string[]>] = useMemo(() => {
+  const [tags, problems, problemsToTags]: [
+    string[],
+    string[],
+    Record<string, string[]>,
+  ] = useMemo(() => {
     if (!response) {
       return [[], [], {}];
     }
 
-    return [response.all_tags, response.all_problems, response.problems_to_tags];
+    return [
+      response.all_tags,
+      response.all_problems,
+      response.problems_to_tags,
+    ];
   }, [response]);
 
   return { tags, problems, problemsToTags };

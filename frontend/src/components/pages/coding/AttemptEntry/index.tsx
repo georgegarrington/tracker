@@ -36,7 +36,10 @@ export function AttemptEntry() {
         }
       }}
     >
-      <CodingProblemAutocomplete problems={problems} setCodingProblem={setCodingProblem} />
+      <CodingProblemAutocomplete
+        problems={problems}
+        setCodingProblem={setCodingProblem}
+      />
       <TextField label="URL" name="url" />
       <Stack direction="row" gap={1}>
         {/* Additional form fields can be added here */}
@@ -49,7 +52,11 @@ export function AttemptEntry() {
           options={["Yes", "No", "Kinda"]}
         />
       </Stack>
-      <TagAutocomplete tags={tags} selectedProblem={codingProblem} problemsToTags={problemsToTags} />
+      <TagAutocomplete
+        tags={tags}
+        selectedProblem={codingProblem}
+        problemsToTags={problemsToTags}
+      />
       <TextField name="notes" label="Notes" minRows={16} multiline />
       <Button variant="contained" sx={{ alignSelf: "center" }} type="submit">
         Record attempt
