@@ -82,10 +82,14 @@ export interface components {
         };
         /** RecordCodingAttemptData */
         RecordCodingAttemptData: {
-            /** Tags */
-            tags: string[];
-            /** Problems */
-            problems: string[];
+            /** All Tags */
+            all_tags: string[];
+            /** All Problems */
+            all_problems: string[];
+            /** Problems To Tags */
+            problems_to_tags: {
+                [key: string]: string[];
+            };
         };
         /** RecordCodingAttemptRequest */
         RecordCodingAttemptRequest: {

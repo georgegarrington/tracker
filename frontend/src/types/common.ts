@@ -3,3 +3,5 @@ export type Difficulty = (typeof DifficultyVariants)[number];
 
 export const NeededHelpVariants = ["Yes", "No", "Kinda"] as const;
 export type NeededHelp = (typeof NeededHelpVariants)[number];
+
+export type UseStateSetter<T> = React.Dispatch<React.SetStateAction<T>>;

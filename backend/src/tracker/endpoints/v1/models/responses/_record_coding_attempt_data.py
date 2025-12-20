@@ -2,5 +2,6 @@ from pydantic import BaseModel
 
 
 class RecordCodingAttemptData(BaseModel):
-    tags: list[str]
-    problems: list[str]
+    all_tags: list[str]
+    all_problems: list[str]
+    problems_to_tags: dict[str, list[str]]

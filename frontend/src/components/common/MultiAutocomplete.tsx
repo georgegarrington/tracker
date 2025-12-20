@@ -4,7 +4,7 @@ import {
   TextField,
   type AutocompleteProps,
 } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export function MultiAutocomplete({
   formName,
@@ -12,14 +12,22 @@ export function MultiAutocomplete({
   label,
   placeholder,
   noOptionsText,
+  defaultValues,
 }: {
   formName: string;
   allOptions: string[];
   label?: string;
   placeholder?: string;
   noOptionsText?: string;
+  defaultValues?: string[];
 }) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+
+    if(defaultValues) setSelectedOptions(defaultValues);
+
+  }, [defaultValues]);
 
   const availableOptions = useMemo(
     () => allOptions.filter((option) => !selectedOptions.includes(option)),

@@ -8,10 +8,14 @@ import { DurationEntry } from "../../../common/DurationEntry";
 import { recordCodingAttempt } from "./helpers/recordCodingAttempt";
 import { useTrackerContext } from "../../../../context";
 import { useNavigate } from "react-router-dom";
+import { useGetRecordCodingAttemptData } from "../../../../hooks/endpoint/useGetRecordCodingAttemptData";
+import { useState } from "react";
 
 export function AttemptEntry() {
   const { client } = useTrackerContext();
   const navigate = useNavigate();
+  const { tags, problems, problemsToTags } = useGetRecordCodingAttemptData();
+  const [codingProblem, setCodingProblem] = useState("");
 
   return (
     <Stack
@@ -32,7 +36,7 @@ export function AttemptEntry() {
         }
       }}
     >
-      <CodingProblemAutocomplete />
+      <CodingProblemAutocomplete problems={problems} setCodingProblem={setCodingProblem} />
       <TextField label="URL" name="url" />
       <Stack direction="row" gap={1}>
         {/* Additional form fields can be added here */}
@@ -45,7 +49,7 @@ export function AttemptEntry() {
           options={["Yes", "No", "Kinda"]}
         />
       </Stack>
-      <TagAutocomplete />
+      <TagAutocomplete tags={tags} selectedProblem={codingProblem} problemsToTags={problemsToTags} />
       <TextField name="notes" label="Notes" minRows={16} multiline />
       <Button variant="contained" sx={{ alignSelf: "center" }} type="submit">
         Record attempt
