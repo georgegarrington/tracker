@@ -1,7 +1,10 @@
+import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from tracker.db.utils._background_backup import background_backup
 from tracker.utils.fastapi._make_route import make_route
 from tracker.endpoints.v1 import (
     get_record_coding_attempt_data,
@@ -22,8 +25,20 @@ async def test_route(req: Request) -> Person:
     )
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    task = asyncio.create_task(background_backup())
+    yield
+    task.cancel()
+    try:
+        await task
+    except asyncio.CancelledError:
+        print("Task cancelled successfully")
+
+
 def make_service() -> FastAPI:
     app = FastAPI(
+        lifespan=lifespan,
         routes=[
             make_route(
                 path="/v1/test",
