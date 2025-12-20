@@ -5,6 +5,9 @@ export const THEME = createTheme({
     mode: "light",
     primary: { main: "#E2E4F6" },
     secondary: { main: "#E7C8DD" },
+    success: { main: "#DCEDC8" },
+    error: { main: "#FFCDD2" },
+    warning: { main: "#FFE0B2" },
     ggtest: { main: "#471f11ff" },
     background: {
       paper: "#f0f0f0",
