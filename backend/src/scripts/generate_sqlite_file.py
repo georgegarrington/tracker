@@ -39,6 +39,13 @@ CREATE TABLE coding_attempts (
 CREATE INDEX idx_coding_attempt_problem_id ON coding_attempts (problem_id);
 CREATE INDEX idx_coding_attempt_time ON coding_attempts (attempt_time);
 
+CREATE TABLE coding_tag_classics (
+    id INTEGER PRIMARY KEY NOT NULL,
+    tag_id INTEGER NOT NULL,
+    problem_id INTEGER NOT NULL,
+    FOREIGN KEY (tag_id) REFERENCES coding_tags(id),
+    FOREIGN KEY (problem_id) REFERENCES coding_problems(id)
+);
 """
 
 CREATE_SYSDESIGN_SCHEMA = """
