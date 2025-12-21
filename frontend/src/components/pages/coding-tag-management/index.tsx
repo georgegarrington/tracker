@@ -1,14 +1,14 @@
-import { Stack, Typography } from "@mui/material";
-import { useGetRecordCodingAttemptData } from "../../../hooks/endpoint/useGetRecordCodingAttemptData";
+import { Stack } from "@mui/material";
+import { useGetProblemsByTag } from "../../../hooks/endpoint/useGetProblemsByTag";
 import { CodingTagManager } from "./CodingTagManager";
 
 export default function CodingTagManagement() {
-  const { tags, problems } = useGetRecordCodingAttemptData();
+  const { problemsByTag } = useGetProblemsByTag();
 
   return (
     <Stack sx={{ p: 2 }} gap={2}>
-      {tags.map((tag, i) => (
-        <CodingTagManager key={i} tag={tag} problems={problems} />
+      {Object.entries(problemsByTag).map(([tag, problems], i) => (
+        <CodingTagManager key={i} tag={tag} tagProblems={problems} />
       ))}
     </Stack>
   );
