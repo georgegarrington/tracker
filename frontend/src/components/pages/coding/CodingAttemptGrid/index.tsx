@@ -72,9 +72,9 @@ export function CodingAttemptTable() {
       rows={attempts}
       columns={columns}
       initialState={{
-        sorting: {
-          sortModel: [{ field: "attempt_time", sort: "desc" }],
-        },
+        // sorting: {
+        //   sortModel: [{ field: "attempt_time", sort: "desc" }],
+        // },
         columns: {
           columnVisibilityModel: {
             minutes_taken: false
