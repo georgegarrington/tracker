@@ -92,6 +92,14 @@ export function CodingTagManager({
     });
   };
 
+  // Get available options for a specific slot (excluding already selected problems in other slots)
+  const getAvailableOptions = (currentIndex: number) => {
+    const selectedInOtherSlots = new Set(
+      selections.filter((s, i) => s !== "" && i !== currentIndex),
+    );
+    return problemsForTag.filter((p) => !selectedInOtherSlots.has(p));
+  };
+
   return (
     <Stack
       direction="column"
@@ -103,7 +111,7 @@ export function CodingTagManager({
         <SingleAutocomplete
           key={`${tag}#${index + 1}`}
           freeSolo={false}
-          allOptions={problemsForTag}
+          allOptions={getAvailableOptions(index)}
           formName={`${tag}#${index + 1}`}
           label={`Classic problem ${index + 1}`}
           value={problem}
