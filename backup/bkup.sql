@@ -24,7 +24,7 @@ BEGIN TRANSACTION;CREATE TABLE coding_attempts (
     FOREIGN KEY (tag_id) REFERENCES coding_tags(id),
     FOREIGN KEY (problem_id) REFERENCES coding_problems(id),
     UNIQUE (tag_id, problem_id)
-);INSERT INTO "coding_tag_classics" VALUES(1,5,9);CREATE TABLE coding_tags (
+);INSERT INTO "coding_tag_classics" VALUES(1,5,3);CREATE TABLE coding_tags (
     id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL UNIQUE
 );INSERT INTO "coding_tags" VALUES(1,'neetcode');INSERT INTO "coding_tags" VALUES(3,'linked_list');INSERT INTO "coding_tags" VALUES(4,'sliding_window');INSERT INTO "coding_tags" VALUES(5,'binary_search');INSERT INTO "coding_tags" VALUES(6,'tree');INSERT INTO "coding_tags" VALUES(7,'stack');INSERT INTO "coding_tags" VALUES(8,'winton');INSERT INTO "coding_tags" VALUES(9,'one_pass');INSERT INTO "coding_tags" VALUES(10,'leetcode');INSERT INTO "coding_tags" VALUES(11,'greedy');INSERT INTO "coding_tags" VALUES(12,'2_pointer');INSERT INTO "coding_tags" VALUES(13,'monotonic');INSERT INTO "coding_tags" VALUES(14,'math');INSERT INTO "coding_tags" VALUES(15,'irrelevant');INSERT INTO "coding_tags" VALUES(16,'dummy1');INSERT INTO "coding_tags" VALUES(17,'uncategorized');INSERT INTO "coding_tags" VALUES(18,'recursion');INSERT INTO "coding_tags" VALUES(19,'backtracking');INSERT INTO "coding_tags" VALUES(20,'dfs');INSERT INTO "coding_tags" VALUES(21,'heapq');INSERT INTO "coding_tags" VALUES(22,'3_pointer');INSERT INTO "coding_tags" VALUES(23,'easy');CREATE TABLE sysdesign_attempts (
