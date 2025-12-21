@@ -5,7 +5,7 @@ from tracker.utils.misc import calculate_next_review
 from dateutil import parser
 
 
-def get_coding_attempts(conn: Connection) -> list[CodingAttempt]:
+def get_latest_coding_attempts(conn: Connection) -> list[CodingAttempt]:
     """
     Get joined view of coding attempt data
     """

@@ -10,7 +10,7 @@ export function useGetCodingAttempts() {
   >(undefined);
 
   useEffect(() => {
-    void client.GET("/v1/get-coding-attempts").then((res) => {
+    void client.GET("/v1/get-latest-coding-attempts").then((res) => {
       console.log("Fetched record coding attempt data: ", res.data);
       setResponse(res.data);
     });

@@ -44,12 +44,12 @@ export function CodingAttemptTable() {
     },
     {
       field: "attempt_time",
-      headerName: "Attempt Time",
+      headerName: "Latest attempt time",
       width: 170,
     },
     {
       field: "next_review",
-      headerName: "Next Review",
+      headerName: "Priority",
       width: 170,
     },
     {

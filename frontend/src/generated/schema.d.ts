@@ -64,7 +64,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/v1/get-coding-attempts": {
+  "/v1/get-latest-coding-attempts": {
     parameters: {
       query?: never;
       header?: never;

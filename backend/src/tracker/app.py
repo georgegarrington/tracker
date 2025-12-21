@@ -9,10 +9,10 @@ from tracker.utils.fastapi._make_route import make_route
 from tracker.endpoints.v1 import (
     get_record_coding_attempt_data,
     record_coding_attempt,
-    get_coding_attempts,
     get_problems_by_tag,
     update_coding_tag_classics,
     get_coding_classics_by_tag,
+    get_latest_coding_attempts
 )
 
 
@@ -59,9 +59,9 @@ def make_service() -> FastAPI:
                 endpoint=record_coding_attempt,
             ),
             make_route(
-                path="/v1/get-coding-attempts",
+                path="/v1/get-latest-coding-attempts",
                 method="GET",
-                endpoint=get_coding_attempts,
+                endpoint=get_latest_coding_attempts,
             ),
             make_route(
                 path="/v1/get-problems-by-tag",
