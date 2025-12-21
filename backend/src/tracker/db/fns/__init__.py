@@ -11,6 +11,12 @@ from ._add_coding_attempt import add_coding_attempt
 from ._remove_coding_tag import remove_coding_tag
 from ._tag_is_used import tag_is_used
 from ._get_problems_by_tag import get_problems_by_tag
+from ._get_coding_tag_classics import (
+    get_coding_tag_classics,
+    get_coding_classics_by_tag,
+)
+from ._add_coding_tag_classic import add_coding_tag_classic
+from ._remove_tag_classic import remove_tag_classic
 
 __all__ = [
     "add_coding_tag",
@@ -26,4 +32,8 @@ __all__ = [
     "remove_coding_tag",
     "tag_is_used",
     "get_problems_by_tag",
+    "get_coding_tag_classics",
+    "get_coding_classics_by_tag",
+    "add_coding_tag_classic",
+    "remove_tag_classic",
 ]

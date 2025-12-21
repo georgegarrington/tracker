@@ -4,9 +4,9 @@ import { useTrackerContext } from "../../context";
 export function useGetProblemsByTag() {
   const { client } = useTrackerContext();
 
-  const [problemsByTag, setProblemsByTag] = useState<
-    Record<string, string[]>
-  >({});
+  const [problemsByTag, setProblemsByTag] = useState<Record<string, string[]>>(
+    {},
+  );
 
   useEffect(() => {
     void client.GET("/v1/get-problems-by-tag").then((res) => {

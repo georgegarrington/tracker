@@ -11,6 +11,8 @@ from tracker.endpoints.v1 import (
     record_coding_attempt,
     get_coding_attempts,
     get_problems_by_tag,
+    update_coding_tag_classics,
+    get_coding_classics_by_tag,
 )
 
 
@@ -65,6 +67,16 @@ def make_service() -> FastAPI:
                 path="/v1/get-problems-by-tag",
                 method="GET",
                 endpoint=get_problems_by_tag,
+            ),
+            make_route(
+                path="/v1/update-coding-tag-classics",
+                method="POST",
+                endpoint=update_coding_tag_classics,
+            ),
+            make_route(
+                path="/v1/get-coding-classics-by-tag",
+                method="GET",
+                endpoint=get_coding_classics_by_tag,
             ),
         ],
     )

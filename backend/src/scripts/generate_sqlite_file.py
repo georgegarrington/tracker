@@ -44,7 +44,8 @@ CREATE TABLE coding_tag_classics (
     tag_id INTEGER NOT NULL,
     problem_id INTEGER NOT NULL,
     FOREIGN KEY (tag_id) REFERENCES coding_tags(id),
-    FOREIGN KEY (problem_id) REFERENCES coding_problems(id)
+    FOREIGN KEY (problem_id) REFERENCES coding_problems(id),
+    UNIQUE (tag_id, problem_id)
 );
 """
 

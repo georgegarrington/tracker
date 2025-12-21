@@ -1,9 +1,4 @@
-import {
-  Autocomplete,
-  FormHelperText,
-  TextField,
-  type AutocompleteProps,
-} from "@mui/material";
+import { Autocomplete, FormHelperText, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
 import type { UseStateSetter } from "../../types/common";
 
@@ -14,7 +9,9 @@ export function SingleAutocomplete({
   placeholder,
   noOptionsText,
   setSelection,
+  onSelectionChange,
   freeSolo = true,
+  value,
 }: {
   formName: string;
   allOptions: string[];
@@ -22,7 +19,9 @@ export function SingleAutocomplete({
   placeholder?: string;
   noOptionsText?: string;
   setSelection?: UseStateSetter<string>;
+  onSelectionChange?: (value: string) => void;
   freeSolo?: boolean;
+  value?: string;
 }) {
   const [userText, setUserText] = useState("");
 
@@ -40,13 +39,16 @@ export function SingleAutocomplete({
         freeSolo={freeSolo}
         fullWidth
         options={allOptions}
+        value={value ?? null}
         onInputChange={(_, value, _reason) => {
           // if (reason === "input") {
           setUserText(value);
           // }
         }}
         onChange={(_, value) => {
-          if (value && setSelection) setSelection(value);
+          const newValue = value ?? "";
+          if (setSelection) setSelection(newValue);
+          if (onSelectionChange) onSelectionChange(newValue);
         }}
         renderInput={(params) => (
           <TextField
