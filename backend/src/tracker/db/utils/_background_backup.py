@@ -11,6 +11,7 @@ def dump_sql_file(sqlite_path: str, dest_sql_path: str) -> None:
     with open(dest_sql_path, "w") as handle, sqlite3.connect(sqlite_path) as conn:
         handle.writelines(conn.iterdump())
 
+
 def create_temp_sqlite_copy(source_path: str, dest_path: str) -> None:
     with (
         sqlite3.connect(source_path) as source,

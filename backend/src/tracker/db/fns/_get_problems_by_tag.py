@@ -7,7 +7,7 @@ def get_problems_by_tag(conn: Connection) -> dict[str, list[str]]:
     Get problems grouped by their tags using an efficient join query.
     Returns a dictionary mapping tag names to lists of problem names.
     """
-    
+
     rows = conn.execute(
         """
         SELECT 
@@ -20,8 +20,7 @@ def get_problems_by_tag(conn: Connection) -> dict[str, list[str]]:
         ORDER BY ct.name;
         """
     ).fetchall()
-    
+
     return {
-        tag_name: parse_group_concat(problem_list)
-        for tag_name, problem_list in rows
+        tag_name: parse_group_concat(problem_list) for tag_name, problem_list in rows
     }
