@@ -17,6 +17,7 @@ from ._get_coding_tag_classics import (
 )
 from ._add_coding_tag_classic import add_coding_tag_classic
 from ._remove_tag_classic import remove_tag_classic
+from ._get_all_coding_attempts import get_all_coding_attempts
 
 __all__ = [
     "add_coding_tag",
@@ -36,4 +37,5 @@ __all__ = [
     "get_coding_classics_by_tag",
     "add_coding_tag_classic",
     "remove_tag_classic",
+    "get_all_coding_attempts",
 ]

@@ -12,7 +12,7 @@ from tracker.endpoints.v1 import (
     get_problems_by_tag,
     update_coding_tag_classics,
     get_coding_classics_by_tag,
-    get_latest_coding_attempts
+    get_latest_coding_attempts,
 )
 
 

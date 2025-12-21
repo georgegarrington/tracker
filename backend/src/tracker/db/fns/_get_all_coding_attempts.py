@@ -5,7 +5,7 @@ from tracker.utils.misc import calculate_next_review
 from dateutil import parser
 
 
-def get_latest_coding_attempts(conn: Connection) -> list[CodingAttempt]:
+def get_all_coding_attempts(conn: Connection) -> list[CodingAttempt]:
     """
     Get joined view of coding attempt data
     """
@@ -13,7 +13,7 @@ def get_latest_coding_attempts(conn: Connection) -> list[CodingAttempt]:
     raw_rows = conn.execute(
         """
 
-    WITH LatestAttempts AS (
+    WITH AllAttempts AS (
         SELECT 
             id,
             problem_id,
@@ -34,20 +34,17 @@ def get_latest_coding_attempts(conn: Connection) -> list[CodingAttempt]:
         GROUP BY cpt.problem_id
     )
     SELECT 
-        la.id,
+        aa.id,
         cp.name AS problem_name,
-        la.difficulty,
-        la.needed_help,
-        la.attempt_time,
-        la.minutes_taken,
+        aa.difficulty,
+        aa.needed_help,
+        aa.attempt_time,
+        aa.minutes_taken,
         pt.tag_list,
-        la.notes
-    FROM LatestAttempts la
-    JOIN coding_problems cp ON cp.id = la.problem_id
-    LEFT JOIN ProblemTags pt ON pt.problem_id = la.problem_id
-    WHERE la.rn = 1
-    ORDER BY la.attempt_time DESC;
-
+        aa.notes
+    FROM AllAttempts aa
+    JOIN coding_problems cp ON cp.id = aa.problem_id
+    LEFT JOIN ProblemTags pt ON pt.problem_id = aa.problem_id
     """
     ).fetchall()
 
