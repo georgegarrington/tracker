@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     BACKUP_DIR: str = "/Users/georgegarrington/source/tracker/backup"
     SQL_BACKUP: str = "/Users/georgegarrington/source/tracker/backup/bkup.sql"
 
+
 @cache
 def get_settings() -> Settings:
     return Settings()

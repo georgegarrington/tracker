@@ -44,6 +44,11 @@ export function CodingAttemptTable() {
       width: 170,
     },
     {
+      field: "next_review",
+      headerName: "Next Review",
+      width: 170,
+    },
+    {
       field: "minutes_taken",
       headerName: "Time Taken",
       renderCell: ({ value }: GridCellParams<any, number>) => value && formatMinutes(value),
@@ -69,6 +74,11 @@ export function CodingAttemptTable() {
       initialState={{
         sorting: {
           sortModel: [{ field: "attempt_time", sort: "desc" }],
+        },
+        columns: {
+          columnVisibilityModel: {
+            minutes_taken: false
+          }
         }
       }}
       autoHeight

@@ -4,14 +4,12 @@ import sqlite3
 import tempfile
 import asyncio
 
-SLEEP_SECONDS = 30
+SLEEP_SECONDS = 60
 
 
 def dump_sql_file(sqlite_path: str, dest_sql_path: str) -> None:
     with open(dest_sql_path, "w") as handle, sqlite3.connect(sqlite_path) as conn:
         handle.writelines(conn.iterdump())
-    print("Finished copying between these 2: ", sqlite_path, dest_sql_path)
-
 
 def create_temp_sqlite_copy(source_path: str, dest_path: str) -> None:
     with (
@@ -41,7 +39,7 @@ async def background_backup() -> None:
                 )
 
             end = datetime.datetime.now()
-            print("Background backed up in: ", end - start)
+            print(f"({end}) Background backed up in: ", end - start)
             await asyncio.sleep(SLEEP_SECONDS)
 
         except Exception as err:

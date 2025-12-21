@@ -1,6 +1,8 @@
 from sqlite3 import Connection
 from tracker.db.models._coding_attempt import CodingAttempt
 from tracker.db.utils import db_connection, parse_group_concat
+from tracker.utils.misc import calculate_next_review
+from dateutil import parser
 
 
 def get_coding_attempts(conn: Connection) -> list[CodingAttempt]:
@@ -51,13 +53,15 @@ def get_coding_attempts(conn: Connection) -> list[CodingAttempt]:
         ).fetchall()
 
         return [
-            # CodingAttempt(*tup) for tup in raw_rows
             CodingAttempt(
                 id=attempt_id,
                 problem_name=problem_name,
                 difficulty=difficulty,
                 needed_help=needed_help,
                 attempt_time=attempt_time,
+                next_review=calculate_next_review(
+                    parser.parse(attempt_time), difficulty, needed_help
+                ),
                 minutes_taken=minutes_taken,
                 tags=parse_group_concat(raw_tags),
                 notes=notes,

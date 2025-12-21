@@ -17,10 +17,10 @@ tracker = "tracker.__main__:main"
 
 [dependency-groups]
 dev = [
-    "alembic==1.17.*",
     "ipykernel==7.1.*",
     "mypy==1.19.*",
     "pydantic-settings==2.*",
     "requests==2.32.*",
     "ruff==0.14.*",
+    "types-python-dateutil>=2.9.0.20251115",
 ]

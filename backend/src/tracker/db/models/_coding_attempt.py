@@ -10,6 +10,7 @@ class CodingAttempt(BaseModel):
     difficulty: Difficulty
     needed_help: NeededHelp
     attempt_time: datetime.datetime
+    next_review: datetime.datetime
     minutes_taken: int
     tags: list[str]
     notes: str | None
