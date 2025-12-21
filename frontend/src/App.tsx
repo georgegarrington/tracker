@@ -21,6 +21,7 @@ import SysDesign from "./components/pages/sysdesign";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { AttemptEntry } from "./components/pages/coding/AttemptEntry";
+import CodingTagManagement from "./components/pages/coding-tag-management";
 
 const drawerWidth = 240;
 
@@ -37,9 +38,12 @@ export default function App() {
               {
                 path: "/coding/new_attempt",
                 noDrawer: true,
-                content: (
-                  <AttemptEntry existingProblems={[]} existingTags={[]} />
-                ),
+                content: <AttemptEntry />,
+              },
+              {
+                path: "/coding/tag_management",
+                label: "Coding Tag Management",
+                content: <CodingTagManagement />,
               },
               { path: "/test", label: "System Design", content: <SysDesign /> },
             ]}

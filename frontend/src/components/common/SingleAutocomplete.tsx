@@ -14,6 +14,7 @@ export function SingleAutocomplete({
   placeholder,
   noOptionsText,
   setSelection,
+  freeSolo = true,
 }: {
   formName: string;
   allOptions: string[];
@@ -21,6 +22,7 @@ export function SingleAutocomplete({
   placeholder?: string;
   noOptionsText?: string;
   setSelection?: UseStateSetter<string>;
+  freeSolo?: boolean;
 }) {
   const [userText, setUserText] = useState("");
 
@@ -35,7 +37,8 @@ export function SingleAutocomplete({
   return (
     <>
       <Autocomplete
-        freeSolo
+        freeSolo={freeSolo}
+        fullWidth
         options={allOptions}
         onInputChange={(_, value, _reason) => {
           // if (reason === "input") {
