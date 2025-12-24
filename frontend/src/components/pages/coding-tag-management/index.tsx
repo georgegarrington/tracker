@@ -4,7 +4,7 @@ import { useGetRecordCodingAttemptData } from "../../../hooks/endpoint/useGetRec
 import { CodingTagManager } from "./CodingTagManager";
 
 export default function CodingTagManagement() {
-  const { tags } = useGetRecordCodingAttemptData();
+  const { tags, problems, problemsToTags } = useGetRecordCodingAttemptData();
   const { classicsByTag } = useGetClassicsByTag();
 
   return (
@@ -14,6 +14,8 @@ export default function CodingTagManagement() {
           key={i}
           tag={tag}
           tagProblems={classicsByTag[tag] ?? []}
+          problems={problems}
+          problemsToTags={problemsToTags}
         />
       ))}
     </Stack>

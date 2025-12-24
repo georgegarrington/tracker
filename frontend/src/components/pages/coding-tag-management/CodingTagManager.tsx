@@ -1,19 +1,20 @@
 import { Button, Divider, Stack } from "@mui/material";
 import { HashChip } from "../../common/HashChip";
 import { SingleAutocomplete } from "../../common/SingleAutocomplete";
-import { useGetRecordCodingAttemptData } from "../../../hooks/endpoint/useGetRecordCodingAttemptData";
 import { useTrackerContext } from "../../../context";
 import { useState, useMemo, useCallback } from "react";
 
 export function CodingTagManager({
   tag,
   tagProblems,
+  problems,
+  problemsToTags,
 }: {
   tag: string;
   tagProblems: string[];
+  problems: string[];
+  problemsToTags: Record<string, string[]>;
 }) {
-  // Get all problems for the autocomplete options, filtered by this tag
-  const { problems, problemsToTags } = useGetRecordCodingAttemptData();
   const { client } = useTrackerContext();
 
   // Filter problems to only those that have this tag
