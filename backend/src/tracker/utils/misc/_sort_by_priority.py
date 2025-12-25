@@ -23,9 +23,14 @@ def sort_by_priority(
 
     graduated_attempts: list[CodingAttempt] = []
 
+    now = datetime.datetime.now()
+
     # First group attempts by tag (using the worst proficient tag as a tie-breaker if multiple tags)
     attempts_by_tag: dict[str, list[CodingAttempt]] = defaultdict(list)
     for attempt in unsorted_attempts:
+
+        if attempt.next_review and attempt.next_review > now:
+            continue
 
         if calculate_attempt_proficiency(attempt.difficulty, attempt.needed_help) == 1:
             graduated_attempts.append(attempt)
@@ -51,7 +56,7 @@ def sort_by_priority(
         problems for _, problems in
     sorted(
         attempts_by_tag.items(),
-        key=lambda item: proficiency_by_tag.get(item[0], 0.0)
+        key=lambda item: proficiency_by_tag.get(item[0], 1.0)
     ))
 
     random.shuffle(graduated_attempts)
