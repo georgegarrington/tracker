@@ -45,21 +45,21 @@ export function CodingAttemptTable() {
     {
       field: "priority",
       headerName: "Priority",
-      width: 170,
+      width: 70,
     },
-    {
-      field: "next_review",
-      headerName: "Next Review",
-      width: 170,
-      renderCell: ({ value }: GridCellParams<any, string | null>) =>
-        <Box
-        // alignItems={"center"}
-        sx={{
-          backgroundColor: value && (new Date(value) < new Date()) ? "warning.main" : undefined,
-          px: 1,
-        }}
-        >{value}</Box>
-    },
+    // {
+    //   field: "next_review",
+    //   headerName: "Next Review",
+    //   width: 170,
+    //   renderCell: ({ value }: GridCellParams<any, string | null>) =>
+    //     <Box
+    //     // alignItems={"center"}
+    //     sx={{
+    //       backgroundColor: value && (new Date(value) < new Date()) ? "warning.main" : undefined,
+    //       px: 1,
+    //     }}
+    //     >{value}</Box>
+    // },
     {
       field: "attempt_time",
       headerName: "Latest attempt time",

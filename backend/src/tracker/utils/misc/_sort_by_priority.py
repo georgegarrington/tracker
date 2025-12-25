@@ -52,7 +52,7 @@ def sort_by_priority(
             ]
         )
 
-    tag_problem_pairs_in_worst_order = (
+    problem_lists_in_worst_order = (
         problems for _, problems in
     sorted(
         attempts_by_tag.items(),
@@ -61,7 +61,7 @@ def sort_by_priority(
 
     random.shuffle(graduated_attempts)
     sorted_attempts: list[CodingAttempt] = [
-        *more_itertools.roundrobin(*tag_problem_pairs_in_worst_order),
+        *more_itertools.roundrobin(*problem_lists_in_worst_order),
         *graduated_attempts,
     ]
 
