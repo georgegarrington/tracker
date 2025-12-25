@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DB_PATH: str = "/Users/georgegarrington/Documents/trackerdb"
     BACKUP_DIR: str = "/Users/georgegarrington/source/tracker/backup"
     SQL_BACKUP: str = "/Users/georgegarrington/source/tracker/backup/bkup.sql"
+    CLASSICS_RATIO: float = 0.6  # 60% classics, 40% non-classics in priority sorting
 
 
 @cache

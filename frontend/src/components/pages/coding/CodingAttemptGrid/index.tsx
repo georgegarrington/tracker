@@ -43,13 +43,26 @@ export function CodingAttemptTable() {
         NeededHelpVariants.indexOf(v1) - NeededHelpVariants.indexOf(v2),
     },
     {
-      field: "attempt_time",
-      headerName: "Latest attempt time",
+      field: "priority",
+      headerName: "Priority",
       width: 170,
     },
     {
       field: "next_review",
-      headerName: "Priority",
+      headerName: "Next Review",
+      width: 170,
+      renderCell: ({ value }: GridCellParams<any, string | null>) =>
+        <Box
+        // alignItems={"center"}
+        sx={{
+          backgroundColor: value && (new Date(value) < new Date()) ? "warning.main" : undefined,
+          px: 1,
+        }}
+        >{value}</Box>
+    },
+    {
+      field: "attempt_time",
+      headerName: "Latest attempt time",
       width: 170,
     },
     {

@@ -54,7 +54,10 @@ def get_latest_coding_attempts(conn: Connection) -> list[CodingAttempt]:
     return [
         CodingAttempt(
             id=attempt_id,
+            priority = 0, # This is updated by the sorting algorithm
             problem_name=problem_name,
+            proficiency = 0.0,
+            # proficiency=calculate_proficiency(difficulty, needed_help),
             difficulty=difficulty,
             needed_help=needed_help,
             attempt_time=attempt_time,

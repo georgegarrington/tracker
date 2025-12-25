@@ -17,6 +17,9 @@ export const THEME = createTheme({
       primary: "#000000ff",
       secondary: "#555555ff",
     },
+    warning: {
+      main: "#ff9800ff",
+    }
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",

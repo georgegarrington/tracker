@@ -1,9 +1,13 @@
 from sqlite3 import Connection
+from typing import Iterable
 
+ignored_tags = [
+    "leetcode", "neetcode", "winton", "irrelevant"
+]
 
 def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
     
-    rows = conn.execute(
+    rows: Iterable[tuple[str, float]] = conn.execute(
         """
         SELECT
             ct.name AS tag_name,
@@ -21,7 +25,7 @@ def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
                         ELSE 0.0
                     END
                 ) / 2.0
-            ) * 100 AS proficiency
+            ) AS proficiency
         FROM coding_tags ct
         JOIN coding_problem_tags cpt ON ct.id = cpt.tag_id
         JOIN coding_attempts ca ON cpt.problem_id = ca.problem_id
@@ -30,4 +34,4 @@ def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
         """
     ).fetchall()
 
-    return {tag_name: proficiency for tag_name, proficiency in rows}
+    return {tag_name: proficiency for tag_name, proficiency in rows if tag_name.lower() not in ignored_tags}

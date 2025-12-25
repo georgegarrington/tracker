@@ -52,6 +52,8 @@ def get_all_coding_attempts(conn: Connection) -> list[CodingAttempt]:
         CodingAttempt(
             id=attempt_id,
             problem_name=problem_name,
+            priority=0,
+            proficiency=0.0,
             difficulty=difficulty,
             needed_help=needed_help,
             attempt_time=attempt_time,
