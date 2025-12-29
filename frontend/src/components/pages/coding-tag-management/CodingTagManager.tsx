@@ -2,7 +2,7 @@ import { Button, Divider, Stack } from "@mui/material";
 import { HashChip } from "../../common/HashChip";
 import { SingleAutocomplete } from "../../common/SingleAutocomplete";
 import { useTrackerContext } from "../../../context";
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 
 export function CodingTagManager({
   tag,
@@ -24,11 +24,12 @@ export function CodingTagManager({
   );
 
   // Track the current selections (5 slots)
-  const initialSlots = useMemo(
-    () => [...tagProblems, "", "", "", "", ""].slice(0, 5),
-    [tagProblems],
-  );
-  const [selections, setSelections] = useState<string[]>(initialSlots);
+  const [selections, setSelections] = useState<string[]>(["", "", "", "", ""]);
+
+  // Sync selections when tagProblems changes (e.g., after async data loads)
+  useEffect(() => {
+    setSelections([...tagProblems, "", "", "", "", ""].slice(0, 5));
+  }, [tagProblems]);
 
   // Calculate whether there are changes
   const hasChanges = useMemo(() => {

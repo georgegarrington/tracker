@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTrackerContext } from "../../context";
 import type { components } from "../../generated/schema";
 
@@ -16,5 +16,10 @@ export function useGetClassicsByTag() {
     });
   }, []);
 
-  return { classicsByTag: response?.classics_by_tag ?? {} };
+  const classicsByTag = useMemo(
+    () => response?.classics_by_tag ?? {},
+    [response],
+  );
+
+  return { classicsByTag };
 }
