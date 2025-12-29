@@ -19,7 +19,7 @@ export const THEME = createTheme({
     },
     warning: {
       main: "#ff9800ff",
-    }
+    },
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
