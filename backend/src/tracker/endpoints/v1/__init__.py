@@ -7,6 +7,7 @@ from ._get_record_coding_attempt_data import get_record_coding_attempt_data
 from ._get_problems_by_tag import get_problems_by_tag
 from ._update_coding_tag_classics import update_coding_tag_classics
 from ._get_coding_classics_by_tag import get_coding_classics_by_tag
+from ._get_proficiency_over_time import get_proficiency_over_time
 
 __all__ = [
     "add_role",
@@ -18,4 +19,5 @@ __all__ = [
     "get_problems_by_tag",
     "update_coding_tag_classics",
     "get_coding_classics_by_tag",
+    "get_proficiency_over_time",
 ]

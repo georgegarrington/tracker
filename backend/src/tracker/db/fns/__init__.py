@@ -19,6 +19,7 @@ from ._add_coding_tag_classic import add_coding_tag_classic
 from ._remove_tag_classic import remove_tag_classic
 from ._get_all_coding_attempts import get_all_coding_attempts
 from ._get_proficiency_by_tag import get_proficiency_by_tag
+from ._get_proficiency_over_time import get_proficiency_over_time
 
 __all__ = [
     "add_coding_tag",
@@ -40,4 +41,5 @@ __all__ = [
     "remove_tag_classic",
     "get_all_coding_attempts",
     "get_proficiency_by_tag",
+    "get_proficiency_over_time",
 ]

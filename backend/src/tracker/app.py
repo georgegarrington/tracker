@@ -13,6 +13,7 @@ from tracker.endpoints.v1 import (
     update_coding_tag_classics,
     get_coding_classics_by_tag,
     get_latest_coding_attempts,
+    get_proficiency_over_time,
 )
 
 
@@ -77,6 +78,11 @@ def make_service() -> FastAPI:
                 path="/v1/get-coding-classics-by-tag",
                 method="GET",
                 endpoint=get_coding_classics_by_tag,
+            ),
+            make_route(
+                path="/v1/get-proficiency-over-time",
+                method="GET",
+                endpoint=get_proficiency_over_time,
             ),
         ],
     )

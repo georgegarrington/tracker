@@ -22,6 +22,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { AttemptEntry } from "./components/pages/coding/AttemptEntry";
 import CodingTagManagement from "./components/pages/coding-tag-management";
+import CodingAnalytics from "./components/pages/coding/analytics";
 
 const drawerWidth = 240;
 
@@ -44,6 +45,11 @@ export default function App() {
                 path: "/coding/tag_management",
                 label: "Coding Tag Management",
                 content: <CodingTagManagement />,
+              },
+              {
+                path: "/coding/analytics",
+                label: "Coding Analytics",
+                content: <CodingAnalytics />,
               },
               { path: "/test", label: "System Design", content: <SysDesign /> },
             ]}
