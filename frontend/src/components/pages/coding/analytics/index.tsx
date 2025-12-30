@@ -1,5 +1,6 @@
 import { Box, Typography, Stack } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useToggle } from "@mantine/hooks";
 import {
   LineChart,
   Line,
@@ -33,7 +34,12 @@ const CHART_COLORS = [
 
 export default function CodingAnalytics() {
   const { dataByTag } = useGetProficiencyOverTime();
-  const [hiddenTags, setHiddenTags] = useState<Set<string>>(new Set());
+  const [cacheTrigger, toggleCacheTrigger] = useToggle();
+
+  const hiddenTags = useMemo(() => {
+    const stored = localStorage.getItem("codingAnalytics.hiddenTags");
+    return stored ? new Set<string>(JSON.parse(stored)) : new Set<string>();
+  }, [cacheTrigger]);
 
   const tags = useMemo(() => Object.keys(dataByTag), [dataByTag]);
 
@@ -86,16 +92,34 @@ export default function CodingAnalytics() {
     });
   }, [dataByTag, tags]);
 
-  const handleLegendClick = (dataKey: string) => {
-    setHiddenTags((prev) => {
-      const next = new Set(prev);
-      if (next.has(dataKey)) {
-        next.delete(dataKey);
-      } else {
-        next.add(dataKey);
-      }
-      return next;
+  // Compute average of visible series at each data point
+  const chartDataWithAverage = useMemo(() => {
+    return chartData.map((dataPoint) => {
+      const visibleValues = tags
+        .filter((tag) => !hiddenTags.has(tag) && typeof dataPoint[tag] === "number")
+        .map((tag) => dataPoint[tag] as number);
+
+      const average =
+        visibleValues.length > 0
+          ? visibleValues.reduce((sum, val) => sum + val, 0) / visibleValues.length
+          : undefined;
+
+      return {
+        ...dataPoint,
+        Average: average,
+      };
     });
+  }, [chartData, tags, hiddenTags]);
+
+  const handleLegendClick = (dataKey: string) => {
+    const next = new Set(hiddenTags);
+    if (next.has(dataKey)) {
+      next.delete(dataKey);
+    } else {
+      next.add(dataKey);
+    }
+    localStorage.setItem("codingAnalytics.hiddenTags", JSON.stringify([...next]));
+    toggleCacheTrigger();
   };
 
   if (tags.length === 0) {
@@ -116,7 +140,7 @@ export default function CodingAnalytics() {
       <Box sx={{ width: "100%", height: 500 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
-            data={chartData}
+            data={chartDataWithAverage}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
@@ -149,6 +173,17 @@ export default function CodingAnalytics() {
                 connectNulls
               />
             ))}
+            <Line
+              key="Average"
+              type="monotone"
+              dataKey="Average"
+              stroke="#666666"
+              strokeWidth={2}
+              strokeDasharray="5 5"
+              dot={false}
+              hide={hiddenTags.has("Average")}
+              connectNulls
+            />
           </LineChart>
         </ResponsiveContainer>
       </Box>
