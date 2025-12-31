@@ -7,10 +7,12 @@ export function TagAutocomplete({
   tags,
   selectedProblem,
   problemsToTags,
+  required,
 }: {
   tags: string[];
   selectedProblem?: string;
   problemsToTags?: Record<string, string[]>;
+  required?: boolean;
 }) {
   // const { tags } = useGetRecordCodingAttemptData();
 
@@ -40,6 +42,8 @@ export function TagAutocomplete({
       placeholder="Type tags here"
       noOptionsText="New tag!"
       defaultValues={defaultValues}
+      required={required}
+      requiredErrorText="Please select at least one tag"
     />
   );
 }

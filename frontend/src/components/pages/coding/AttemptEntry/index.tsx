@@ -56,6 +56,7 @@ export function AttemptEntry() {
         tags={tags}
         selectedProblem={codingProblem}
         problemsToTags={problemsToTags}
+        required
       />
       <TextField name="notes" label="Notes" minRows={16} multiline />
       <Button variant="contained" sx={{ alignSelf: "center" }} type="submit">
