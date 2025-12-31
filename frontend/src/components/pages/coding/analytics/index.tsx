@@ -1,5 +1,5 @@
-import { Box, Typography, Stack } from "@mui/material";
-import { useMemo } from "react";
+import { Box, Typography, Stack, ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { useMemo, useState } from "react";
 import { useToggle } from "@mantine/hooks";
 import {
   LineChart,
@@ -32,9 +32,51 @@ const CHART_COLORS = [
   "#c5b0d5", // light purple
 ];
 
+type TimeRange = "lastMonth" | "lastYear" | "allTime";
+
+const getTimeRangeStart = (range: TimeRange): Date | null => {
+  const now = new Date();
+  switch (range) {
+    case "lastMonth":
+      return new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    case "lastYear":
+      return new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+    case "allTime":
+      return null;
+  }
+};
+
+const formatTickForRange = (timestamp: string, range: TimeRange): string => {
+  const date = new Date(timestamp);
+  switch (range) {
+    case "lastMonth":
+      // Show day and month for last month view
+      return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    case "lastYear":
+    case "allTime":
+      // Show month and year for longer ranges
+      return date.toLocaleDateString(undefined, { month: "short", year: "2-digit" });
+  }
+};
+
+const getTickInterval = (dataLength: number, range: TimeRange): number => {
+  switch (range) {
+    case "lastMonth":
+      // Aim for ~4 ticks (weekly)
+      return Math.max(1, Math.floor(dataLength / 4));
+    case "lastYear":
+      // Aim for ~12 ticks (monthly)
+      return Math.max(1, Math.floor(dataLength / 12));
+    case "allTime":
+      // Aim for reasonable monthly intervals
+      return Math.max(1, Math.floor(dataLength / 12));
+  }
+};
+
 export default function CodingAnalytics() {
   const { dataByTag } = useGetProficiencyOverTime();
   const [cacheTrigger, toggleCacheTrigger] = useToggle();
+  const [timeRange, setTimeRange] = useState<TimeRange>("lastMonth");
 
   const hiddenTags = useMemo(() => {
     const stored = localStorage.getItem("codingAnalytics.hiddenTags");
@@ -45,11 +87,16 @@ export default function CodingAnalytics() {
 
   // Transform data for Recharts: array of objects with timestamp and proficiency per tag
   const chartData = useMemo(() => {
-    // Collect all unique timestamps across all tags
+    const rangeStart = getTimeRangeStart(timeRange);
+
+    // Collect all unique timestamps across all tags, filtered by time range
     const timestampSet = new Set<string>();
     for (const tag of tags) {
       for (const point of dataByTag[tag] || []) {
-        timestampSet.add(point.attempt_time);
+        const pointDate = new Date(point.attempt_time);
+        if (!rangeStart || pointDate >= rangeStart) {
+          timestampSet.add(point.attempt_time);
+        }
       }
     }
 
@@ -60,16 +107,39 @@ export default function CodingAnalytics() {
 
     // Build chart data: for each timestamp, include each tag's proficiency at that point
     // We need to carry forward the last known value for each tag
+    // First, compute the last known value BEFORE the time range for each tag
     const lastKnownValues: Record<string, number> = {};
+    for (const tag of tags) {
+      const tagData = dataByTag[tag] || [];
+      for (const point of tagData) {
+        const pointDate = new Date(point.attempt_time);
+        if (rangeStart && pointDate < rangeStart) {
+          lastKnownValues[tag] = point.proficiency;
+        } else {
+          break;
+        }
+      }
+    }
+
     const tagIndices: Record<string, number> = {};
     for (const tag of tags) {
+      // Start from the first point in the range
+      const tagData = dataByTag[tag] || [];
       tagIndices[tag] = 0;
+      if (rangeStart) {
+        while (
+          tagIndices[tag] < tagData.length &&
+          new Date(tagData[tagIndices[tag]].attempt_time) < rangeStart
+        ) {
+          tagIndices[tag]++;
+        }
+      }
     }
 
     return sortedTimestamps.map((timestamp) => {
       const dataPoint: Record<string, string | number> = {
         timestamp,
-        displayTime: new Date(timestamp).toLocaleDateString(),
+        displayTime: formatTickForRange(timestamp, timeRange),
       };
 
       for (const tag of tags) {
@@ -90,7 +160,7 @@ export default function CodingAnalytics() {
 
       return dataPoint;
     });
-  }, [dataByTag, tags]);
+  }, [dataByTag, tags, timeRange]);
 
   // Compute average of visible series at each data point
   const chartDataWithAverage = useMemo(() => {
@@ -136,7 +206,19 @@ export default function CodingAnalytics() {
       sx={{ p: 2, width: "100%", height: "100%" }}
       gap={2}
     >
-      <Typography variant="h5">Proficiency Over Time</Typography>
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Typography variant="h5">Proficiency Over Time</Typography>
+        <ToggleButtonGroup
+          value={timeRange}
+          exclusive
+          onChange={(_, value) => value && setTimeRange(value)}
+          size="small"
+        >
+          <ToggleButton value="lastMonth">Last Month</ToggleButton>
+          <ToggleButton value="lastYear">Last Year</ToggleButton>
+          <ToggleButton value="allTime">All Time</ToggleButton>
+        </ToggleButtonGroup>
+      </Stack>
       <Box sx={{ width: "100%", height: 500 }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -145,17 +227,18 @@ export default function CodingAnalytics() {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-              dataKey="displayTime"
+              dataKey="timestamp"
               tick={{ fontSize: 12 }}
-              interval="preserveStartEnd"
+              interval={getTickInterval(chartDataWithAverage.length, timeRange)}
+              tickFormatter={(timestamp) => formatTickForRange(timestamp, timeRange)}
             />
             <YAxis
               domain={[0, 1]}
               tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
             />
             <Tooltip
-              formatter={(value: number) => `${(value * 100).toFixed(1)}%`}
-              labelFormatter={(label) => `Date: ${label}`}
+              formatter={(value) => typeof value === "number" ? `${(value * 100).toFixed(1)}%` : value}
+              labelFormatter={(timestamp) => `Date: ${new Date(timestamp).toLocaleDateString()}`}
             />
             <Legend
               onClick={(e) => handleLegendClick(e.dataKey as string)}
