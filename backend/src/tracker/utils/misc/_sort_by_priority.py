@@ -36,10 +36,11 @@ def sort_by_priority(
             graduated_attempts.append(attempt)
             continue
 
-        worst_tag_of_attempt = min(
-            attempt.tags, 
-            key = lambda tag: proficiency_by_tag.get(tag, 0.0)
-        )
+        # Filter to only tags that have proficiency data (excludes ignored tags)
+        valid_tags = [t for t in attempt.tags if t in proficiency_by_tag]
+        if not valid_tags:
+            continue
+        worst_tag_of_attempt = min(valid_tags, key=lambda tag: proficiency_by_tag[tag])
         attempts_by_tag[worst_tag_of_attempt].append(attempt)
 
     # Sort attempts within each tag by 1. are they classic, and 2. soonest upcoming review date
