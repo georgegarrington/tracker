@@ -23,7 +23,9 @@ def sort_by_priority(
     now = datetime.now()
 
     # Build set of all classic problem names
-    all_classics: set[str] = set(itertools.chain.from_iterable(classics_by_tag.values()))
+    all_classics: set[str] = set(
+        itertools.chain.from_iterable(classics_by_tag.values())
+    )
 
     def get_worst_proficiency(attempt: CodingAttempt) -> float:
         proficiencies = [proficiency_by_tag.get(tag, 0.0) for tag in attempt.tags]

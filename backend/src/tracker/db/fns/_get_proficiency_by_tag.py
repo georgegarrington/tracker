@@ -1,13 +1,16 @@
 from sqlite3 import Connection
-from typing import Iterable
+from typing import Iterable, NamedTuple
 
-ignored_tags = [
-    "leetcode", "neetcode", "winton", "irrelevant"
-]
+ignored_tags = ["leetcode", "neetcode", "winton", "irrelevant"]
 
-def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
-    
-    rows: Iterable[tuple[str, float]] = conn.execute(
+
+class TagStats(NamedTuple):
+    proficiency: float
+    problem_count: int
+
+
+def get_proficiency_by_tag(conn: Connection) -> dict[str, TagStats]:
+    rows: Iterable[tuple[str, float, int]] = conn.execute(
         """
         SELECT
             ct.name AS tag_name,
@@ -25,7 +28,8 @@ def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
                         ELSE 0.0
                     END
                 ) / 2.0
-            ) AS proficiency
+            ) AS proficiency,
+            COUNT(DISTINCT cpt.problem_id) AS problem_count
         FROM coding_tags ct
         JOIN coding_problem_tags cpt ON ct.id = cpt.tag_id
         JOIN coding_attempts ca ON cpt.problem_id = ca.problem_id
@@ -34,4 +38,8 @@ def get_proficiency_by_tag(conn: Connection) -> dict[str, float]:
         """
     ).fetchall()
 
-    return {tag_name: proficiency for tag_name, proficiency in rows if tag_name.lower() not in ignored_tags}
+    return {
+        tag_name: TagStats(proficiency=proficiency, problem_count=problem_count)
+        for tag_name, proficiency, problem_count in rows
+        if tag_name.lower() not in ignored_tags
+    }

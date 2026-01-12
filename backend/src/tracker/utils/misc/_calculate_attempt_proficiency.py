@@ -1,9 +1,9 @@
-
 from tracker.types import Difficulty, NeededHelp
 
 
-def calculate_attempt_proficiency(difficulty: Difficulty, needed_help: NeededHelp) -> float:
-    
+def calculate_attempt_proficiency(
+    difficulty: Difficulty, needed_help: NeededHelp
+) -> float:
     proficiency = 0.0
 
     match difficulty:
@@ -21,5 +21,5 @@ def calculate_attempt_proficiency(difficulty: Difficulty, needed_help: NeededHel
             proficiency += 0.25
         case "Yes":
             pass
-    
+
     return proficiency

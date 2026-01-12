@@ -15,7 +15,13 @@ async def get_proficiency_over_time() -> ProficiencyOverTime:
         data_by_tag = db_get_proficiency_over_time(conn)
         return ProficiencyOverTime(
             data_by_tag={
-                tag: [TagDataPoint(**point) for point in points]
+                tag: [
+                    TagDataPoint(
+                        attempt_time=str(point["attempt_time"]),
+                        proficiency=float(point["proficiency"]),
+                    )
+                    for point in points
+                ]
                 for tag, points in data_by_tag.items()
             }
         )
